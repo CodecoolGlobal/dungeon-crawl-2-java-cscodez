@@ -5,21 +5,45 @@ import com.codecool.dungeoncrawl.logic.Drawable;
 
 public abstract class Actor implements Drawable {
     private Cell cell;
-    private int health = 10;
+    protected int health = 10;
+    protected boolean isEnemy;
+    protected int damage;
 
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
     }
 
+    public void attack(Actor enemy) {
+
+        enemy.setHealth(enemy.getHealth() - damage);
+        if (enemy.getHealth() <= 0) {
+            enemy.getCell().setActor(null);
+        } else {
+            health -= enemy.getDamage();
+        }
+    }
+
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (!isWall(nextCell) && !isEnemy(nextCell) && !isItem(nextCell)) {
+        if (!isWall(nextCell) && !isActor(nextCell) && !isItem(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
-        }else if (isItem(nextCell)) {
 
+        } else {
+
+            boolean playerMoves = this instanceof Player;
+
+            if (playerMoves) {
+                if (nextCell.getActor().isEnemy()) {
+                    attack(nextCell.getActor());
+                }
+            }
+
+            else if (this.isEnemy && nextCell.getActor() instanceof Player) {
+                attack(nextCell.getActor());
+            }
         }
     }
 
@@ -31,17 +55,28 @@ public abstract class Actor implements Drawable {
         return cell.getTileName().equals("wall");
     }
 
-    private boolean isEnemy(Cell cell) {
-        try {
-            return cell.getActor().getTileName().equals("skeleton");
-        }
-        catch (NullPointerException e) {
-            return false;
-        }
+    private boolean isActor(Cell cell) {
+        return cell.getActor() != null;
+    }
+
+    private boolean isEnemy() {
+        return this.isEnemy;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
     }
 
     public int getHealth() {
         return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     public Cell getCell() {
