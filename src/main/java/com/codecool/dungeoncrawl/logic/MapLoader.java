@@ -68,6 +68,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             new KeyCard(cell, "keyCard");
                             break;
+                        case 'm':
+                            cell.setType(CellType.FLOOR);
+                            new Mandalorian(cell);
+                            break;
 
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
