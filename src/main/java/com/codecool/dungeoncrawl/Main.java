@@ -90,7 +90,7 @@ public class Main extends Application {
                         //Button button = new Button("button");
                         //button.setOnKeyPressed();
                         //this.ui.add(button, 0, 1);
-                        buttonHandler(this.ui);
+                        buttonHandler(this.ui, cell.getItem().getTileName());
                     }
                     Tiles.drawTile(context, cell.getActor(), x, y);
 
@@ -104,14 +104,25 @@ public class Main extends Application {
         healthLabel.setText("" + map.getPlayer().getHealth());
     }
 
-    private void buttonHandler( GridPane ui) {
-        Button button = new Button("Pick up item?");
-        EventHandler<ActionEvent> event = e -> {
-            System.out.println("hello");
-            ui.getChildren().remove(button);
+    private void buttonHandler( GridPane ui, String itemName) {
+        Button yesButton = new Button("Pick up " + itemName);
+        Button noButton = new Button("Don't pickup " + itemName);
+        EventHandler<ActionEvent> yesEvent = e -> {
+            System.out.println("helloYes");
+            ui.getChildren().remove(yesButton);
+            ui.getChildren().remove(noButton);
         };
-        button.setOnAction(event);
-        ui.add(button, 0, 1);
+        EventHandler<ActionEvent> noEvent = e -> {
+            System.out.println("helloNo");
+            ui.getChildren().remove(yesButton);
+            ui.getChildren().remove(noButton);
+        };
+
+        yesButton.setOnAction(yesEvent);
+        noButton.setOnAction(noEvent);
+        ui.add(yesButton, 0, 1);
+        ui.add(noButton, 1, 1);
+
     }
 }
 
