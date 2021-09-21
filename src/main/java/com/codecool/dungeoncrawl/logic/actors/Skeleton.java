@@ -5,6 +5,9 @@ import com.codecool.dungeoncrawl.logic.Cell;
 public class Skeleton extends Actor {
     public Skeleton(Cell cell) {
         super(cell);
+        isEnemy = true;
+        health = 10;
+        damage = 2;
     }
 
     @Override
