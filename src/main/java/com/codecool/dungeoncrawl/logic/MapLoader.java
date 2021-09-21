@@ -2,6 +2,8 @@ package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.Skeleton;
+import com.codecool.dungeoncrawl.logic.items.Item;
+import com.codecool.dungeoncrawl.logic.items.LightSaber;
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -40,7 +42,8 @@ public class MapLoader {
                             map.setPlayer(new Player(cell));
                             break;
                         case 'y':
-                            cell.setType(CellType.ITEM);
+                            cell.setType(CellType.FLOOR);
+                            new LightSaber(cell);
                             break;
 
                         default:
