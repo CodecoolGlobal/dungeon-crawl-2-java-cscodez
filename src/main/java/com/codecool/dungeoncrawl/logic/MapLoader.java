@@ -1,10 +1,9 @@
 package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.logic.actors.enemies.GreenBrute;
-import com.codecool.dungeoncrawl.logic.actors.enemies.Jawa;
-import com.codecool.dungeoncrawl.logic.actors.enemies.Mandalorian;
-import com.codecool.dungeoncrawl.logic.actors.enemies.Stormtrooper;
+import com.codecool.dungeoncrawl.logic.actors.enemies.*;
+import com.codecool.dungeoncrawl.logic.items.LightSaber;
+
 
 import java.io.InputStream;
 import java.util.Scanner;
@@ -42,9 +41,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
                             break;
-                        /*case 'y':
-                            cell.setType(CellType.ITEM);
-                            break;*/
+                        case 'y':
+                            cell.setType(CellType.FLOOR);
+                            new LightSaber(cell);
+                            break;
                         case 'd':
                             cell.setType(CellType.CLOSEDDOOR);
                             break;
