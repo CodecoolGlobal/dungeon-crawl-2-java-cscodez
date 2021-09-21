@@ -43,7 +43,7 @@ public class MapLoader {
                             break;
                         case 'y':
                             cell.setType(CellType.FLOOR);
-                            new LightSaber(cell);
+                            new LightSaber(cell, 5);
                             break;
                         case 'd':
                             cell.setType(CellType.CLOSEDDOOR);
