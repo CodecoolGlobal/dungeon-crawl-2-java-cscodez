@@ -35,8 +35,8 @@ public class Tiles {
         tileMap.put("hologram", new Tile(0, 0));
         tileMap.put("keyCard", new Tile(0, 0));
         tileMap.put("mandalorian", new Tile(2, 2));
-        tileMap.put("item", new Tile(0, 3));
         tileMap.put("closed-door", new Tile(8,0));
+        tileMap.put("dead-player", new Tile(6,1));
         tileMap.put("opened-door", new Tile(5,1));
     }
 
