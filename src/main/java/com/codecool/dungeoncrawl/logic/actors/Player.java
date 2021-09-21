@@ -10,7 +10,12 @@ public class Player extends Actor {
         damage = 5;
     }
 
+    public boolean isPlayerAlive() {
+        return health > 0;
+    }
+
     public String getTileName() {
-        return "player";
+
+        return health >= 0 ? "player" : "dead-player";
     }
 }
