@@ -46,7 +46,7 @@ public class MapLoader {
                             new LightSaber(cell, 5, "lightSaber");
                             break;
                         case 'd':
-                            cell.setType(CellType.CLOSEDDOOR);
+                            cell.setType(CellType.CLOSED_DOOR);
                             break;
                         case 'j':
                             cell.setType(CellType.FLOOR);
