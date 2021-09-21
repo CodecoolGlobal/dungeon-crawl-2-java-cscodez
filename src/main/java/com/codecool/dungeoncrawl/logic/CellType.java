@@ -4,8 +4,8 @@ public enum CellType {
     EMPTY("empty"),
     FLOOR("floor"),
     WALL("wall"),
-    CLOSEDDOOR("closed-door"),
-    OPENEDDOOR("opened-door");
+    CLOSED_DOOR("closed-door"),
+    OPENED_DOOR("opened-door");
 
     private final String tileName;
 

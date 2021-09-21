@@ -2,7 +2,7 @@ package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemies.*;
-import com.codecool.dungeoncrawl.logic.items.LightSaber;
+import com.codecool.dungeoncrawl.logic.items.*;
 
 
 import java.io.InputStream;
@@ -41,12 +41,12 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
                             break;
-                        case 'y':
+                        case 'L':
                             cell.setType(CellType.FLOOR);
-                            new LightSaber(cell);
+                            new LightSaber(cell, 5, "lightSaber");
                             break;
                         case 'd':
-                            cell.setType(CellType.CLOSEDDOOR);
+                            cell.setType(CellType.CLOSED_DOOR);
                             break;
                         case 'j':
                             cell.setType(CellType.FLOOR);
@@ -55,6 +55,22 @@ public class MapLoader {
                         case 'G':
                             cell.setType(CellType.FLOOR);
                             new GreenBrute(cell);
+                            break;
+                        case 'B':
+                            cell.setType(CellType.FLOOR);
+                            new BlueMilk(cell, "blueMilk");
+                            break;
+                        case 'H':
+                            cell.setType(CellType.FLOOR);
+                            new Hologram(cell, "hologram");
+                            break;
+                        case 'K':
+                            cell.setType(CellType.FLOOR);
+                            new KeyCard(cell, "keyCard");
+                            break;
+                        case 'm':
+                            cell.setType(CellType.FLOOR);
+                            new Mandalorian(cell);
                             break;
 
                         default:

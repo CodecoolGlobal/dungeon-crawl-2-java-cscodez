@@ -1,9 +1,8 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
-import com.codecool.dungeoncrawl.Main;
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.Drawable;
-import javafx.scene.control.Button;
 
 public abstract class Actor implements Drawable {
     private Cell cell;
@@ -28,6 +27,19 @@ public abstract class Actor implements Drawable {
         }
     }
 
+    public void setAttackMode(Cell nextCell) {
+        boolean playerMoves = this instanceof Player;
+
+        if (playerMoves) {
+            if (nextCell.getActor().isEnemy()) {
+                attack(nextCell.getActor());
+            }
+        }
+        else if (this.isEnemy && nextCell.getActor() instanceof Player) {
+            attack(nextCell.getActor());
+        }
+    }
+
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
         if (!isWall(nextCell) && !isActor(nextCell)) {
@@ -35,20 +47,10 @@ public abstract class Actor implements Drawable {
             nextCell.setActor(this);
             cell = nextCell;
 
-        } else {
-
-            boolean playerMoves = this instanceof Player;
-
-            if (playerMoves) {
-                if (nextCell.getActor().isEnemy()) {
-                    attack(nextCell.getActor());
-                }
-            }
-
-            else if (this.isEnemy && nextCell.getActor() instanceof Player) {
-                attack(nextCell.getActor());
-            }
+        } else if (isActor(nextCell)) {
+            setAttackMode(nextCell);
         }
+        cell.checkDoor();
     }
 
     private boolean isWall(Cell cell) {
