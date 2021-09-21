@@ -39,8 +39,11 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             map.setPlayer(new Player(cell));
                             break;
-                        case 'y':
+                        /*case 'y':
                             cell.setType(CellType.ITEM);
+                            break;*/
+                        case 'd':
+                            cell.setType(CellType.CLOSEDDOOR);
                             break;
 
                         default:
