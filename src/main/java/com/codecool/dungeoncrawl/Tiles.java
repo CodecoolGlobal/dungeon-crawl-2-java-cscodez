@@ -30,6 +30,7 @@ public class Tiles {
         tileMap.put("jawa", new Tile(0, 2));
         tileMap.put("stormtrooper", new Tile(3, 2));
         tileMap.put("greenBrute", new Tile(1, 2));
+        tileMap.put("mandalorian", new Tile(2, 2));
         tileMap.put("item", new Tile(0, 3));
         tileMap.put("closed-door", new Tile(8,0));
         tileMap.put("opened-door", new Tile(6,0));
