@@ -16,6 +16,6 @@ public class Player extends Actor {
 
     public String getTileName() {
 
-        return health >= 0 ? "player" : "dead-player";
+        return health > 0 ? "player" : "dead-player";
     }
 }
