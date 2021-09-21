@@ -29,6 +29,7 @@ public class Tiles {
         tileMap.put("player", new Tile(1, 1));
         tileMap.put("jawa", new Tile(0, 2));
         tileMap.put("stormtrooper", new Tile(3, 2));
+        tileMap.put("greenBrute", new Tile(1, 2));
         tileMap.put("item", new Tile(0, 3));
     }
 

@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl.logic;
 
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.logic.actors.enemies.GreenBrute;
 import com.codecool.dungeoncrawl.logic.actors.enemies.Jawa;
 import com.codecool.dungeoncrawl.logic.actors.enemies.Stormtrooper;
 
@@ -46,6 +47,10 @@ public class MapLoader {
                         case 'j':
                             cell.setType(CellType.FLOOR);
                             new Jawa(cell);
+                            break;
+                        case 'G':
+                            cell.setType(CellType.FLOOR);
+                            new GreenBrute(cell);
                             break;
 
                         default:
