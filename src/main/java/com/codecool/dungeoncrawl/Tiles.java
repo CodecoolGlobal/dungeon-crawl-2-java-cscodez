@@ -10,7 +10,7 @@ import java.util.Map;
 public class Tiles {
     public static int TILE_WIDTH = 32;
 
-    private static Image tileset = new Image("/dungeon-crawl.png", 543 * 2, 543 * 2, true, false);
+    private static Image tileset = new Image("/tiles_sw.png", 543 * 2, 543 * 2, true, false);
     private static Map<String, Tile> tileMap = new HashMap<>();
     public static class Tile {
         public final int x, y, w, h;
@@ -23,13 +23,13 @@ public class Tiles {
     }
 
     static {
-        tileMap.put("empty", new Tile(0, 1));
-        tileMap.put("wall", new Tile(0, 0));
-        tileMap.put("floor", new Tile(0, 1));
-        tileMap.put("player", new Tile(3, 0));
-        tileMap.put("jawa", new Tile(9, 0));
-        tileMap.put("stormtrooper", new Tile(4, 0));
-        tileMap.put("item", new Tile(0, 0));
+        tileMap.put("empty", new Tile(0, 0));
+        tileMap.put("wall", new Tile(2, 0));
+        tileMap.put("floor", new Tile(1, 0));
+        tileMap.put("player", new Tile(1, 1));
+        tileMap.put("jawa", new Tile(0, 2));
+        tileMap.put("stormtrooper", new Tile(3, 2));
+        tileMap.put("item", new Tile(0, 3));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
