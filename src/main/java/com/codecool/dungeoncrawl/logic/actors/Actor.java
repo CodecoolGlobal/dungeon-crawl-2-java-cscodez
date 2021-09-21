@@ -14,11 +14,17 @@ public abstract class Actor implements Drawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (!isWall(nextCell) && !isEnemy(nextCell)) {
+        if (!isWall(nextCell) && !isEnemy(nextCell) && !isItem(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
+        }else if (isItem(nextCell)) {
+
         }
+    }
+
+    private boolean isItem(Cell cell) {
+        return  cell.getTileName().equals("item");
     }
 
     private boolean isWall(Cell cell) {

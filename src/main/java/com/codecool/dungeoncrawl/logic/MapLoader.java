@@ -40,6 +40,7 @@ public class MapLoader {
                             map.setPlayer(new Player(cell));
                             break;
                         case 'y':
+                            cell.setType(CellType.ITEM);
                             break;
 
                         default:
