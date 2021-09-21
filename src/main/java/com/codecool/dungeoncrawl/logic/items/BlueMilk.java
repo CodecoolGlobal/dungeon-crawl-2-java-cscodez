@@ -3,15 +3,8 @@ package com.codecool.dungeoncrawl.logic.items;
 import com.codecool.dungeoncrawl.logic.Cell;
 
 public class BlueMilk extends Item{
-
-    private int healthGain;
-
-    BlueMilk(Cell cell) {
-        super(cell);
-        //this.healthGain = healthGain;
+    public BlueMilk(Cell cell, String tileName) {
+        super(cell, tileName);
     }
-
-    public int getHealthGain() {
-        return healthGain;
-    }
+    public int getHealthGain() { return 5; }
 }
