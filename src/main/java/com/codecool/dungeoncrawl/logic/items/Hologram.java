@@ -1,10 +1,12 @@
 package com.codecool.dungeoncrawl.logic.items;
 
+import com.codecool.dungeoncrawl.logic.Cell;
+
 public class Hologram extends Item{
     String unknownMessage = "";
     String translatedMessage = "";
-    Hologram(String name, String tileName) {
-        super(name, tileName);
+    Hologram(Cell cell) {
+        super(cell);
     }
 
     public String getUnknownMessage() {

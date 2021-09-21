@@ -84,12 +84,13 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null ) {
                     if (cell.getItem() != null) {
-                        Button button = new Button("hello");
+                        Button button = new Button("button");
                         this.ui.add(button, 0,1);
-                        Tiles.drawTile(context, cell.getActor(), x, y);
                     }
                     Tiles.drawTile(context, cell.getActor(), x, y);
 
+                } else if (cell.getItem() != null) {
+                    Tiles.drawTile(context, cell.getItem(), x, y);
                 } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
