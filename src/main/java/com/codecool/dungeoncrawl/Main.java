@@ -7,13 +7,17 @@ import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.util.Directions;
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -43,7 +47,6 @@ public class Main extends Application {
         this.ui.add(healthLabel, 1, 0);
 
 
-
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
@@ -62,19 +65,15 @@ public class Main extends Application {
         switch (keyEvent.getCode()) {
             case UP:
                 map.getPlayer().move(0, -1);
-
                 break;
             case DOWN:
                 map.getPlayer().move(0, 1);
-
                 break;
             case LEFT:
                 map.getPlayer().move(-1, 0);
-
                 break;
             case RIGHT:
-                map.getPlayer().move(1,0);
-
+                map.getPlayer().move(1, 0);
                 break;
         }
         moveEnemies();
@@ -100,10 +99,12 @@ public class Main extends Application {
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
-                if (cell.getActor() != null ) {
+                if (cell.getActor() != null) {
                     if (cell.getItem() != null) {
-                        Button button = new Button("button");
-                        this.ui.add(button, 0,1);
+                        //Button button = new Button("button");
+                        //button.setOnKeyPressed();
+                        //this.ui.add(button, 0, 1);
+                        buttonHandler(this.ui, cell.getItem().getTileName());
                     }
                     Tiles.drawTile(context, cell.getActor(), x, y);
 
@@ -116,4 +117,26 @@ public class Main extends Application {
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
     }
+
+    private void buttonHandler( GridPane ui, String itemName) {
+        Button yesButton = new Button("Pick up " + itemName);
+        Button noButton = new Button("Don't pickup " + itemName);
+        EventHandler<ActionEvent> yesEvent = e -> {
+            System.out.println("helloYes");
+            ui.getChildren().remove(yesButton);
+            ui.getChildren().remove(noButton);
+        };
+        EventHandler<ActionEvent> noEvent = e -> {
+            System.out.println("helloNo");
+            ui.getChildren().remove(yesButton);
+            ui.getChildren().remove(noButton);
+        };
+
+        yesButton.setOnAction(yesEvent);
+        noButton.setOnAction(noEvent);
+        ui.add(yesButton, 0, 1);
+        ui.add(noButton, 1, 1);
+
+    }
 }
+
