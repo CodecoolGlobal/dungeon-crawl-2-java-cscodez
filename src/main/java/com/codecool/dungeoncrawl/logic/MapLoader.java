@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemies.GreenBrute;
 import com.codecool.dungeoncrawl.logic.actors.enemies.Jawa;
+import com.codecool.dungeoncrawl.logic.actors.enemies.Mandalorian;
 import com.codecool.dungeoncrawl.logic.actors.enemies.Stormtrooper;
 
 import java.io.InputStream;
@@ -54,6 +55,10 @@ public class MapLoader {
                         case 'G':
                             cell.setType(CellType.FLOOR);
                             new GreenBrute(cell);
+                            break;
+                        case 'm':
+                            cell.setType(CellType.FLOOR);
+                            new Mandalorian(cell);
                             break;
 
                         default:
