@@ -1,7 +1,9 @@
 package com.codecool.dungeoncrawl.logic.actors;
 
+import com.codecool.dungeoncrawl.Main;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.Drawable;
+import javafx.scene.control.Button;
 
 public abstract class Actor implements Drawable {
     private Cell cell;
@@ -26,7 +28,7 @@ public abstract class Actor implements Drawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (!isWall(nextCell) && !isActor(nextCell) && !isItem(nextCell)) {
+        if (!isWall(nextCell) && !isActor(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
@@ -45,10 +47,6 @@ public abstract class Actor implements Drawable {
                 attack(nextCell.getActor());
             }
         }
-    }
-
-    private boolean isItem(Cell cell) {
-        return  cell.getTileName().equals("item");
     }
 
     private boolean isWall(Cell cell) {

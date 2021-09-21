@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
+    GridPane ui = new GridPane();
     Canvas canvas = new Canvas(
             map.getWidth() * Tiles.TILE_WIDTH,
             map.getHeight() * Tiles.TILE_WIDTH);
@@ -30,15 +31,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        GridPane ui = new GridPane();
-        Button button = new Button("My Button");
-        ui.setPrefWidth(200);
-        ui.setPadding(new Insets(10));
+        //GridPane ui = new GridPane();
 
-        ui.add(new Label("Health: "), 0, 0);
-        ui.add(healthLabel, 1, 0);
-        ui.add(button, 0, 3);
-        ui.getChildren().remove(button);
+        this.ui.setPrefWidth(200);
+        this.ui.setPadding(new Insets(10));
+
+        this.ui.add(new Label("Health: "), 0, 0);
+        this.ui.add(healthLabel, 1, 0);
+
 
 
         BorderPane borderPane = new BorderPane();
@@ -82,8 +82,14 @@ public class Main extends Application {
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
-                if (cell.getActor() != null) {
+                if (cell.getActor() != null ) {
+                    if (cell.getItem() != null) {
+                        Button button = new Button("hello");
+                        this.ui.add(button, 0,1);
+                        Tiles.drawTile(context, cell.getActor(), x, y);
+                    }
                     Tiles.drawTile(context, cell.getActor(), x, y);
+
                 } else {
                     Tiles.drawTile(context, cell, x, y);
                 }
