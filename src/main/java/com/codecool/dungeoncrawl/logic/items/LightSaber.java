@@ -6,8 +6,8 @@ public class LightSaber extends Item {
 
     private int damage;
 
-    public LightSaber(Cell cell, int damage) {
-        super(cell);
+    public LightSaber(Cell cell, int damage, String tileName) {
+        super(cell, tileName);
         this.damage = damage;
     }
 
