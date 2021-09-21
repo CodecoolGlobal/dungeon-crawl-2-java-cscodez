@@ -3,7 +3,7 @@ package com.codecool.dungeoncrawl.logic.items;
 import com.codecool.dungeoncrawl.logic.Cell;
 
 public class KeyCard extends Item{
-    KeyCard(Cell cell) {
-        super(cell);
+    public KeyCard(Cell cell, String tileName) {
+        super(cell, tileName);
     }
 }
