@@ -23,11 +23,12 @@ public class Tiles {
     }
 
     static {
-        tileMap.put("empty", new Tile(10, 0));
+        tileMap.put("empty", new Tile(0, 1));
         tileMap.put("wall", new Tile(0, 0));
-        tileMap.put("floor", new Tile(10, 0));
+        tileMap.put("floor", new Tile(0, 1));
         tileMap.put("player", new Tile(3, 0));
-        tileMap.put("skeleton", new Tile(4, 0));
+        tileMap.put("jawa", new Tile(9, 0));
+        tileMap.put("stormtrooper", new Tile(4, 0));
         tileMap.put("item", new Tile(0, 0));
     }
 
