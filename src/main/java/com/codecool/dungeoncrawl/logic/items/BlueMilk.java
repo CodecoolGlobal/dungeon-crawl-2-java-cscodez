@@ -1,12 +1,14 @@
 package com.codecool.dungeoncrawl.logic.items;
 
+import com.codecool.dungeoncrawl.logic.Cell;
+
 public class BlueMilk extends Item{
 
     private int healthGain;
 
-    BlueMilk(String name, String tileName, int healthGain) {
-        super(name, tileName);
-        this.healthGain = healthGain;
+    BlueMilk(Cell cell) {
+        super(cell);
+        //this.healthGain = healthGain;
     }
 
     public int getHealthGain() {

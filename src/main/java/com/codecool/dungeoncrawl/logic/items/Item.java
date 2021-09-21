@@ -1,14 +1,25 @@
 package com.codecool.dungeoncrawl.logic.items;
 
-public class Item {
-    private String name;
-    private String tileName;
+import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.Drawable;
 
-    Item(String name, String tileName){
-        this.name = name;
-        this.tileName = tileName;
+public abstract class Item implements Drawable {
+    private Cell cell;
+
+    public Item(Cell cell) {
+        this.cell = cell;
+        this.cell.setItem(this);
     }
-    public String getName() {return name;}
-    public String getTileName() {return tileName;}
 
+    @Override
+    public String getTileName() {
+        return "item";
+    }
 }
+
+
+
+
+
+
+

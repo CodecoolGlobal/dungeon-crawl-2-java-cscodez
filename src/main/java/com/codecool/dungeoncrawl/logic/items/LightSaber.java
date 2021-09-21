@@ -1,15 +1,17 @@
 package com.codecool.dungeoncrawl.logic.items;
 
-public class LightSaber extends Item{
+import com.codecool.dungeoncrawl.logic.Cell;
+
+public class LightSaber extends Item {
 
     private int damage;
 
-    LightSaber(String name, String tileName, int damage) {
-        super(name, tileName);
-        this.damage = damage;
+    public LightSaber(Cell cell) {
+        super(cell);
     }
 
     public int getDamage() {
         return damage;
     }
+
 }
