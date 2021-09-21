@@ -14,15 +14,24 @@ public abstract class Actor implements Drawable {
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
-        if (!isWall(nextCell)) {
+        if (!isWall(nextCell) && !isEnemy(nextCell)) {
             cell.setActor(null);
             nextCell.setActor(this);
             cell = nextCell;
         }
     }
 
-    public boolean isWall(Cell cell) {
+    private boolean isWall(Cell cell) {
         return cell.getTileName().equals("wall");
+    }
+
+    private boolean isEnemy(Cell cell) {
+        try {
+            return cell.getActor().getTileName().equals("skeleton");
+        }
+        catch (NullPointerException e) {
+            return false;
+        }
     }
 
     public int getHealth() {
