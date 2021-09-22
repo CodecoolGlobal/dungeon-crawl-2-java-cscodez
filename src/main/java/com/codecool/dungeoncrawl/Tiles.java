@@ -25,18 +25,18 @@ public class Tiles {
     static {
         tileMap.put("empty", new Tile(0, 0));
         tileMap.put("wall", new Tile(2, 0));
-        tileMap.put("floor", new Tile(1, 0));
+        tileMap.put("floor", new Tile(5, 0));
         tileMap.put("jawa", new Tile(0, 2));
         tileMap.put("stormtrooper", new Tile(3, 2));
         tileMap.put("greenBrute", new Tile(1, 2));
         tileMap.put("lightSaber", new Tile(0, 3));
-        tileMap.put("blueMilk", new Tile(0, 0));
-        tileMap.put("hologram", new Tile(0, 0));
-        tileMap.put("keyCard", new Tile(0, 0));
+        tileMap.put("blueMilk", new Tile(2, 3));
+        tileMap.put("hologram", new Tile(3, 3));
+        tileMap.put("keyCard", new Tile(4, 3));
         tileMap.put("mandalorian", new Tile(2, 2));
-        tileMap.put("closed-door", new Tile(8,0));
+        tileMap.put("closed-door", new Tile(3,0));
         tileMap.put("dead", new Tile(6,1));
-        tileMap.put("opened-door", new Tile(5,1));
+        tileMap.put("opened-door", new Tile(4,0));
         tileMap.put("player", new Tile(1, 1));
         tileMap.put("player-up", new Tile(2, 1));
         tileMap.put("player-left", new Tile(4, 1));
