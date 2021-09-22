@@ -1,11 +1,13 @@
 package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
+import com.codecool.dungeoncrawl.logic.items.Door;
 import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.logic.items.KeyCard;
 
 public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
+    private Door door;
     private GameMap gameMap;
     private int x, y;
     private Item item;
@@ -17,21 +19,20 @@ public class Cell implements Drawable {
         this.type = type;
     }
 
-    public void checkDoor() {
-        boolean isKeyCardPossessed = false;
-        for (Item item : gameMap.getPlayer().getInventory()) {
-            if (item instanceof KeyCard) {
-                isKeyCardPossessed = true;
-                break;
-            }
-        }
-        if (type.equals(CellType.CLOSED_DOOR) && isKeyCardPossessed) {
-            type = CellType.OPENED_DOOR;
-        }
-    }
-
     public CellType getType() {
         return type;
+    }
+
+    public GameMap getGameMap() {
+        return gameMap;
+    }
+
+    public Door getDoor() {
+        return door;
+    }
+
+    public void setDoor(Door door) {
+        this.door = door;
     }
 
     public Item getItem() {
