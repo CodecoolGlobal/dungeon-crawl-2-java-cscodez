@@ -19,8 +19,8 @@ public class Door {
 
     public void checkDoor() {
         boolean isKeyCardPossessed = false;
-        for (Item item : cell.getGameMap().getPlayer().getInventory()) {
-            if (item instanceof KeyCard) {
+        for (String item : cell.getGameMap().getPlayer().getInventory().keySet()) {
+            if (item.equals("KeyCard")) {
                 isKeyCardPossessed = true;
                 break;
             }
