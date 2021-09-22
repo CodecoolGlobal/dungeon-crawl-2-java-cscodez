@@ -52,7 +52,7 @@ public abstract class Actor implements Drawable {
         } else if (isActor(nextCell)) {
             setAttackMode(nextCell);
         }
-        cell.checkDoor();
+        if (cell.getDoor() != null) cell.getDoor().checkDoor();
     }
 
     private boolean isWall(Cell cell) {
