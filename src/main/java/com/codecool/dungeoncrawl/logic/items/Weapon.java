@@ -2,12 +2,12 @@ package com.codecool.dungeoncrawl.logic.items;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 
-public class LightSaber extends Weapon {
+public class Weapon extends Item{
 
-    public LightSaber(Cell cell, String tileName) {
+    protected int damage;
+
+    public Weapon(Cell cell, String tileName) {
         super(cell, tileName);
-        this.damage = 40;
-        this.name = "Lightsaber";
     }
 
     public int getDamage() {
