@@ -96,11 +96,8 @@ public class Main extends Application {
         for (int x = 0; x < map.getWidth(); x++) {
             for (int y = 0; y < map.getHeight(); y++) {
                 Cell cell = map.getCell(x, y);
-                if (cell.getActor() != null) {
-                    if (cell.getItem() != null) {
-                        //Button button = new Button("button");
-                        //button.setOnKeyPressed();
-                        //this.ui.add(button, 0, 1);
+                if (cell.getActor() != null ) {
+                    if (cell.getItem() != null && cell.getActor() instanceof Player) {
                         buttonHandler(this.ui, cell.getItem().getTileName());
                     }
                     Tiles.drawTile(context, cell.getActor(), x, y);
