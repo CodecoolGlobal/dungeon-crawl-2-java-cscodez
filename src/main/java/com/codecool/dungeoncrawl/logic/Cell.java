@@ -19,11 +19,12 @@ public class Cell implements Drawable {
 
     public void checkDoor() {
         boolean isKeyCardPossessed = false;
-        for (Item item : gameMap.getPlayer().getInventory()) {
-            if (item instanceof KeyCard) {
+        for (String item : gameMap.getPlayer().getInventory().keySet()) {
+            if (item.equals("Key Card") ) {
                 isKeyCardPossessed = true;
                 break;
             }
+
         }
         if (type.equals(CellType.CLOSED_DOOR) && isKeyCardPossessed) {
             type = CellType.OPENED_DOOR;
