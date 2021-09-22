@@ -9,10 +9,10 @@ public class LightSaber extends Item {
     public LightSaber(Cell cell, int damage, String tileName) {
         super(cell, tileName);
         this.damage = damage;
+        this.name = "Lightsaber";
     }
 
     public int getDamage() {
         return damage;
     }
-
 }

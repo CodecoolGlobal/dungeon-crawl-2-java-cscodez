@@ -5,6 +5,7 @@ import com.codecool.dungeoncrawl.logic.Cell;
 public class Hologram extends Item{
     public Hologram(Cell cell, String tileName) {
         super(cell, tileName);
+        this.name = "Hologram";
     }
 
     public String getUnknownMessage() {
