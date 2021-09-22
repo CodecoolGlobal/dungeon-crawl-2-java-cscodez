@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.logic.actors;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.items.Item;
+import javafx.scene.Node;
 
 import java.util.LinkedList;
 
@@ -18,7 +19,12 @@ public class Player extends Actor {
     }
 
     public LinkedList<Item> getInventory() {
-        return inventory;
+        return  inventory;
+    }
+
+
+    public void setItemToInventory (Item item) {
+        inventory.add(item);
     }
 
     public String getTileName() {
