@@ -3,9 +3,7 @@ package com.codecool.dungeoncrawl;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
-import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.util.Directions;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,9 +13,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
@@ -31,6 +27,7 @@ public class Main extends Application {
             map.getHeight() * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
+    Label inventoryLabel = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -38,14 +35,15 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        //GridPane ui = new GridPane();
 
-        this.ui.setPrefWidth(200);
+        this.ui.setPrefWidth(250);
         this.ui.setPadding(new Insets(10));
 
         this.ui.add(new Label("Health: "), 0, 0);
         this.ui.add(healthLabel, 1, 0);
 
+
+        this.ui.add(inventoryLabel, 0, 3);
 
         BorderPane borderPane = new BorderPane();
 
@@ -113,14 +111,15 @@ public class Main extends Application {
     }
 
     private void buttonHandler( GridPane ui, Cell cell) {
-        Button yesButton = new Button("Pick up " + cell.getItem().getTileName());
-        Button noButton = new Button("Don't pickup " + cell.getItem().getTileName());
+        Button yesButton = new Button("Pick up\n" + cell.getItem().getName());
+        Button noButton = new Button("Don't pickup\n" + cell.getItem().getName());
         EventHandler<ActionEvent> yesEvent = e -> {
             map.getPlayer().setItemToInventory(cell.getItem());
             cell.setItem(null);
-            //ui.add(map.getPlayer().getNodeInventory(), 0, 2);
             ui.getChildren().remove(yesButton);
             ui.getChildren().remove(noButton);
+            inventoryLabel.setText(map.getPlayer().inventoryForDisplay());
+
         };
         EventHandler<ActionEvent> noEvent = e -> {
             System.out.println("helloNo");
