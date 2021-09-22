@@ -5,6 +5,7 @@ import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.Drawable;
 
 public abstract class Actor implements Drawable {
+    protected String tileName;
     private Cell cell;
     protected int health = 10;
     protected boolean isEnemy;
@@ -25,6 +26,7 @@ public abstract class Actor implements Drawable {
         } else {
             health -= enemy.getDamage();
         }
+
     }
 
     public void setAttackMode(Cell nextCell) {
@@ -34,11 +36,11 @@ public abstract class Actor implements Drawable {
             if (nextCell.getActor().isEnemy()) {
                 attack(nextCell.getActor());
             }
-        }
-        else if (this.isEnemy && nextCell.getActor() instanceof Player) {
+        } else if (this.isEnemy && nextCell.getActor() instanceof Player) {
             attack(nextCell.getActor());
         }
     }
+
 
     public void move(int dx, int dy) {
         Cell nextCell = cell.getNeighbor(dx, dy);
@@ -91,5 +93,18 @@ public abstract class Actor implements Drawable {
 
     public int getY() {
         return cell.getY();
+    }
+
+    public boolean isAlive() {
+        return health > 0;
+    }
+
+    @Override
+    public String getTileName() {
+        return tileName;
+    }
+
+    public void setTileName(String tileName) {
+        this.tileName = tileName;
     }
 }
