@@ -31,6 +31,9 @@ public class Player extends Actor {
     }
 
     public String getTileName() {
+        if (getWeapon() != null && getWeapon().getTileName().equals("lightSaber")) {
+            return tileName + "-" + getWeapon().getTileName();
+        }
         return tileName;
     }
 

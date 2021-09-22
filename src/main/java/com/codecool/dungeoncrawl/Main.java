@@ -97,6 +97,9 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null ) {
                     if (cell.getItem() != null && cell.getActor() instanceof Player) {
+                        if (cell.getItem().getTileName().equals("lightSaber")) {
+                            cell.getActor().setTileName("player-pick-up-lightSaber");
+                        }
                         buttonHandler(this.ui, cell);
                     }
                     Tiles.drawTile(context, cell.getActor(), x, y);

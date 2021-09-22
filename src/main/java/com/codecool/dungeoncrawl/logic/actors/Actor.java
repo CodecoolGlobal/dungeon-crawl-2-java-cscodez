@@ -70,7 +70,6 @@ public abstract class Actor implements Drawable {
 
     public int getDamage() {
         if (weapon != null) {
-            System.out.println(damage + weapon.getDamage());
             return damage + weapon.getDamage();
         }
         return damage;
