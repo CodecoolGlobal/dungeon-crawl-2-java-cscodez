@@ -117,6 +117,7 @@ public class Main extends Application {
         Button noButton = new Button("Don't pickup " + cell.getItem().getTileName());
         EventHandler<ActionEvent> yesEvent = e -> {
             map.getPlayer().setItemToInventory(cell.getItem());
+            cell.setItem(null);
             //ui.add(map.getPlayer().getNodeInventory(), 0, 2);
             ui.getChildren().remove(yesButton);
             ui.getChildren().remove(noButton);
