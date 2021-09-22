@@ -37,7 +37,7 @@ public class Tiles {
         tileMap.put("closed-door", new Tile(3,0));
         tileMap.put("dead", new Tile(6,1));
         tileMap.put("opened-door", new Tile(4,0));
-        tileMap.put("player", new Tile(1, 1));
+        tileMap.put("player-down", new Tile(1, 1));
         tileMap.put("player-up", new Tile(2, 1));
         tileMap.put("player-left", new Tile(4, 1));
         tileMap.put("player-right", new Tile(3, 1));

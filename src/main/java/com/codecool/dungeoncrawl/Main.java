@@ -67,7 +67,7 @@ public class Main extends Application {
                     map.getPlayer().move(0, -1);
                     break;
                 case DOWN:
-                    map.getPlayer().setTileName("player");
+                    map.getPlayer().setTileName("player-down");
                     map.getPlayer().move(0, 1);
                     break;
                 case LEFT:
