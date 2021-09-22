@@ -62,36 +62,33 @@ public class Main extends Application {
     }
 
     private void onKeyPressed(KeyEvent keyEvent) {
-        switch (keyEvent.getCode()) {
-            case UP:
-                map.getPlayer().move(0, -1);
-                break;
-            case DOWN:
-                map.getPlayer().move(0, 1);
-                break;
-            case LEFT:
-                map.getPlayer().move(-1, 0);
-                break;
-            case RIGHT:
-                map.getPlayer().move(1, 0);
-                break;
+        if (map.getPlayer().isAlive()) {
+            switch (keyEvent.getCode()) {
+                case UP:
+                    map.getPlayer().setTileName("player-up");
+                    map.getPlayer().move(0, -1);
+                    break;
+                case DOWN:
+                    map.getPlayer().setTileName("player");
+                    map.getPlayer().move(0, 1);
+                    break;
+                case LEFT:
+                    map.getPlayer().setTileName("player-left");
+                    map.getPlayer().move(-1, 0);
+                    break;
+                case RIGHT:
+                    map.getPlayer().setTileName("player-right");
+                    map.getPlayer().move(1, 0);
+                    break;
+            }
         }
-        moveEnemies();
+        map.moveEnemies();
+        if (!map.getPlayer().isAlive()) {
+            map.getPlayer().setTileName("dead");
+        }
         refresh();
     }
 
-    private void moveEnemies() {
-        Cell[][] cells = map.getCells();
-        for (Cell[] row : cells) {
-            for (Cell cell : row) {
-                Actor enemy = cell.getActor();
-                if (cell.getActor() != null && !(cell.getActor() instanceof Player)) {
-                    Directions direction = Directions.getRandomDirection();
-                    enemy.move(direction.getX(), direction.getY());
-                }
-            }
-        }
-    }
 
     private void refresh() {
         context.setFill(Color.BLACK);
