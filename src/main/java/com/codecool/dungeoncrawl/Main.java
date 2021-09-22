@@ -98,7 +98,7 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null ) {
                     if (cell.getItem() != null && cell.getActor() instanceof Player) {
-                        buttonHandler(this.ui, cell.getItem().getTileName());
+                        buttonHandler(this.ui, cell);
                     }
                     Tiles.drawTile(context, cell.getActor(), x, y);
 
@@ -112,11 +112,12 @@ public class Main extends Application {
         healthLabel.setText("" + map.getPlayer().getHealth());
     }
 
-    private void buttonHandler( GridPane ui, String itemName) {
-        Button yesButton = new Button("Pick up " + itemName);
-        Button noButton = new Button("Don't pickup " + itemName);
+    private void buttonHandler( GridPane ui, Cell cell) {
+        Button yesButton = new Button("Pick up " + cell.getItem().getTileName());
+        Button noButton = new Button("Don't pickup " + cell.getItem().getTileName());
         EventHandler<ActionEvent> yesEvent = e -> {
-            System.out.println("helloYes");
+            map.getPlayer().setItemToInventory(cell.getItem());
+            //ui.add(map.getPlayer().getNodeInventory(), 0, 2);
             ui.getChildren().remove(yesButton);
             ui.getChildren().remove(noButton);
         };
