@@ -11,6 +11,7 @@ public class Player extends Actor {
 
     public Player(Cell cell) {
         super(cell);
+        tileName = "player";
         isEnemy = false;
         health = 10;
         damage = 5;
@@ -26,12 +27,7 @@ public class Player extends Actor {
         inventory.add(item);
     }
 
-    public boolean isPlayerAlive() {
-        return health > 0;
-    }
-
     public String getTileName() {
-
-        return health > 0 ? "player" : "dead-player";
+        return tileName;
     }
 }
