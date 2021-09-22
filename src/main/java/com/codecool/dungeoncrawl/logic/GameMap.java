@@ -1,6 +1,8 @@
 package com.codecool.dungeoncrawl.logic;
 
+import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.util.Directions;
 
 public class GameMap {
     private int width;
@@ -30,6 +32,19 @@ public class GameMap {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public void moveEnemies() {
+
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                Actor enemy = cell.getActor();
+                if (cell.getActor() != null && !(cell.getActor() instanceof Player)) {
+                    Directions direction = Directions.getRandomDirection();
+                    enemy.move(direction.getX(), direction.getY());
+                }
+            }
+        }
     }
 
     public int getWidth() {
