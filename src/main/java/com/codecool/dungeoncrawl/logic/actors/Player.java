@@ -20,7 +20,12 @@ public class Player extends Actor {
         return inventory;
     }
 
+    public boolean isPlayerAlive() {
+        return health > 0;
+    }
+
     public String getTileName() {
-        return "player";
+
+        return health > 0 ? "player" : "dead-player";
     }
 }

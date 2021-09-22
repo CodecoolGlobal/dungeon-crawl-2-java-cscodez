@@ -11,6 +11,10 @@ public class Mandalorian extends Actor {
         damage = 5;
     }
 
+    public void move(int dx, int dy) {
+      // hehe :3
+    }
+
     @Override
     public String getTileName() {
         return "mandalorian";
