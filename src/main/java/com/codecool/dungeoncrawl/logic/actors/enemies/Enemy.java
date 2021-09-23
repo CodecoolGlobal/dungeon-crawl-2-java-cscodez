@@ -7,7 +7,6 @@ public class Enemy extends Actor {
     private boolean hasMoved;
     public Enemy(Cell cell) {
         super(cell);
-        isEnemy = true;
         hasMoved = false;
     }
 
