@@ -22,9 +22,10 @@ import javafx.stage.Stage;
 public class Main extends Application {
     GameMap map = MapLoader.loadMap();
     GridPane ui = new GridPane();
+    int visibleSize = 10;
     Canvas canvas = new Canvas(
-            map.getWidth() * Tiles.TILE_WIDTH,
-            map.getHeight() * Tiles.TILE_WIDTH);
+            visibleSize * Tiles.TILE_WIDTH,
+            visibleSize * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     Label inventoryLabel = new Label();
@@ -91,21 +92,29 @@ public class Main extends Application {
     private void refresh() {
         context.setFill(Color.BLACK);
         context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        for (int x = 0; x < map.getWidth(); x++) {
-            for (int y = 0; y < map.getHeight(); y++) {
+        int [] startCoordinate = map.getPlayerCoordinate(visibleSize);
+
+        int j = 0;
+        int k = 0;
+
+        for (int x = startCoordinate[0]; x < visibleSize + startCoordinate[0]; x++) {
+            for (int y = startCoordinate[1]; y < startCoordinate[1] + visibleSize; y++) {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null ) {
                     if (cell.getItem() != null && cell.getActor() instanceof Player) {
                         buttonHandler(this.ui, cell);
                     }
-                    Tiles.drawTile(context, cell.getActor(), x, y);
+                    Tiles.drawTile(context, cell.getActor(), k, j);
 
                 } else if (cell.getItem() != null) {
-                    Tiles.drawTile(context, cell.getItem(), x, y);
+                    Tiles.drawTile(context, cell.getItem(), k, j);
                 } else {
-                    Tiles.drawTile(context, cell, x, y);
+                    Tiles.drawTile(context, cell, k, j);
                 }
+                j++;
             }
+            j = 0;
+            k++;
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
     }
