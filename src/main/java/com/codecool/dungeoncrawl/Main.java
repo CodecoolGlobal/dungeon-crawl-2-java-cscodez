@@ -7,6 +7,7 @@ import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
 import com.codecool.dungeoncrawl.logic.tiles.Tiles;
+import com.codecool.dungeoncrawl.util.BuildUI;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -140,7 +141,7 @@ public class Main extends Application {
             cell.setItem(null);
             ui.getChildren().remove(yesButton);
             ui.getChildren().remove(noButton);
-            inventoryLabel.setText(map.getPlayer().inventoryForDisplay());
+            inventoryLabel.setText(BuildUI.inventoryForDisplay(map.getPlayer().getInventory()));
 
         };
         EventHandler<ActionEvent> noEvent = e -> {
