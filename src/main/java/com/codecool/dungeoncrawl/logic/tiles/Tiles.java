@@ -35,7 +35,7 @@ public class Tiles {
         tileMap.put(TileNames.KEY_CARD.getName(), TileNames.KEY_CARD.getTile());
         tileMap.put(TileNames.MANDALORIAN.getName(), TileNames.MANDALORIAN.getTile());
         tileMap.put(TileNames.CLOSED_DOOR.getName(), TileNames.CLOSED_DOOR.getTile());
-        tileMap.put(TileNames.DEAD.getName(), TileNames.DEAD.getTile());
+        tileMap.put(TileNames.GRAVE.getName(), TileNames.GRAVE.getTile());
         tileMap.put(TileNames.OPENED_DOOR.getName(), TileNames.OPENED_DOOR.getTile());
         tileMap.put(TileNames.PLAYER_DOWN.getName(), TileNames.PLAYER_DOWN.getTile());
         tileMap.put(TileNames.PLAYER_UP.getName(), TileNames.PLAYER_UP.getTile());
