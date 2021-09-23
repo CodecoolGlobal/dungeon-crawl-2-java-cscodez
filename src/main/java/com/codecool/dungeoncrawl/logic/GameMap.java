@@ -39,15 +39,15 @@ public class GameMap {
 
         for (Cell[] row : cells) {
             for (Cell cell : row) {
-                Actor enemy = cell.getActor();
-                if (enemy instanceof Enemy) {
-
-                    if (!((Enemy) enemy).getHasMoved()) {
+                Actor actor = cell.getActor();
+                if (actor instanceof Enemy) {
+                    Enemy enemy = (Enemy)actor;
+                    if (!enemy.getHasMoved()) {
                         Directions direction = Directions.getRandomDirection();
                         enemy.move(direction.getX(), direction.getY());
-                        ((Enemy) enemy).swapHasMoved();
+                        enemy.swapHasMoved();
                     } else {
-                        ((Enemy) enemy).swapHasMoved();
+                        enemy.swapHasMoved();
                     }
 
                 }
