@@ -11,7 +11,7 @@ public class Player extends Actor {
 
     public Player(Cell cell) {
         super(cell);
-        tileName = "player";
+        tileName = "player-down";
         isEnemy = false;
         health = 10;
         damage = 5;
@@ -31,6 +31,9 @@ public class Player extends Actor {
     }
 
     public String getTileName() {
+        if (getWeapon() != null && getWeapon().getTileName().equals("lightSaber")) {
+            return tileName + "-" + getWeapon().getTileName();
+        }
         return tileName;
     }
 

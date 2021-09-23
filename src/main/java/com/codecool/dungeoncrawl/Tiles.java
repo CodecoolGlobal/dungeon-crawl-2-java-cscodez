@@ -37,10 +37,15 @@ public class Tiles {
         tileMap.put("closed-door", new Tile(3,0));
         tileMap.put("dead", new Tile(6,1));
         tileMap.put("opened-door", new Tile(4,0));
-        tileMap.put("player", new Tile(1, 1));
+        tileMap.put("player-down", new Tile(1, 1));
         tileMap.put("player-up", new Tile(2, 1));
         tileMap.put("player-left", new Tile(4, 1));
         tileMap.put("player-right", new Tile(3, 1));
+        tileMap.put("player-down-lightSaber", new Tile(0, 1));
+        tileMap.put("player-up-lightSaber", new Tile(0, 1));
+        tileMap.put("player-left-lightSaber", new Tile(0, 1));
+        tileMap.put("player-right-lightSaber", new Tile(0, 1));
+        tileMap.put("player-pick-up-lightSaber", new Tile(5, 1));
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
