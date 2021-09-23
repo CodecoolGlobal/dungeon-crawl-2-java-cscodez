@@ -20,9 +20,9 @@ public enum TileNames {
     PLAYER_LEFT("player-left", 4, 1),
     PLAYER_RIGHT("player-right", 3, 1),
     PLAYER_DOWN_LIGHTSABER("player-down-lightSaber", 0, 1),
-    PLAYER_UP_LIGHTSABER("player-up-lightSaber", 0, 1),
-    PLAYER_LEFT_LIGHTSABER("player-left-lightSaber", 0, 1),
-    PLAYER_RIGHT_LIGHTSABER("player-right-lightSaber", 0, 1),
+    PLAYER_UP_LIGHTSABER("player-up-lightSaber", 6, 1),
+    PLAYER_LEFT_LIGHTSABER("player-left-lightSaber", 8, 1),
+    PLAYER_RIGHT_LIGHTSABER("player-right-lightSaber", 7, 1),
     PLAYER_PICK_UP_LIGHTSABER("player-pick-up-lightSaber", 5, 1);
 
 
