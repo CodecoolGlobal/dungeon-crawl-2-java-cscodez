@@ -4,7 +4,6 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.items.Item;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class Player extends Actor {
     private final HashMap<String, Integer> inventory;

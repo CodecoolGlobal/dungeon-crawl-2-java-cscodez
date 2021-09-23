@@ -9,7 +9,6 @@ public class BlueMilk extends Item{
         super(cell, tileName);
         this.name = className;
     }
-    public int getHealthGain() { return 5; }
 
     public static String getClassName() {
         return className;

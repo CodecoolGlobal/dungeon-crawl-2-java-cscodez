@@ -67,9 +67,6 @@ public abstract class Actor implements Drawable {
         return damage;
     }
 
-    public void setDamage(int damage) {
-        this.damage = damage;
-    }
 
     public int getHealth() {
         return health;

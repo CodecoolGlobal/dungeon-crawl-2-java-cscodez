@@ -1,6 +1,5 @@
 package com.codecool.dungeoncrawl.logic.tiles;
 
-import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.actors.enemies.Enemies;
 

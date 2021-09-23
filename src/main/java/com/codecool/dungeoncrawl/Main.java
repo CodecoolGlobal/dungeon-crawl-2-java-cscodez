@@ -43,9 +43,6 @@ public class Main extends Application {
         this.ui.add(new Label("Health: "), 0, 0);
         this.ui.add(healthLabel, 1, 0);
 
-        //!!!!!!
-        //uiBuilder.inventoryDisplayer();
-
         BorderPane borderPane = new BorderPane();
 
         borderPane.setCenter(canvas);
