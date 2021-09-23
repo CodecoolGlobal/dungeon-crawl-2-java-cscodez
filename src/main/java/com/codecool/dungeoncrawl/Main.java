@@ -80,7 +80,7 @@ public class Main extends Application {
                     map.getPlayer().move(1, 0);
                     break;
                 case I:
-                    uiBuilder.inventoryDisplayer(map.getPlayer().getInventory(),ui);
+                    uiBuilder.inventoryDisplayer(ui, map, healthLabel);
 
             }
         }
