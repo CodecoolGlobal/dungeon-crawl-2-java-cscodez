@@ -26,6 +26,7 @@ public class Tiles {
         tileMap.put(TileNames.EMPTY.getName(), TileNames.EMPTY.getTile());
         tileMap.put(TileNames.WALL.getName(), TileNames.WALL.getTile());
         tileMap.put(TileNames.FLOOR.getName(), TileNames.FLOOR.getTile());
+        tileMap.put(TileNames.FLOOR2.getName(), TileNames.FLOOR2.getTile());
         tileMap.put(TileNames.JAWA.getName(), TileNames.JAWA.getTile());
         tileMap.put(TileNames.STORMTROOPER.getName(), TileNames.STORMTROOPER.getTile());
         tileMap.put(TileNames.GREEN_BRUTE.getName(), TileNames.GREEN_BRUTE.getTile());
@@ -46,6 +47,21 @@ public class Tiles {
         tileMap.put(TileNames.PLAYER_LEFT_LIGHTSABER.getName(), TileNames.PLAYER_LEFT_LIGHTSABER.getTile());
         tileMap.put(TileNames.PLAYER_RIGHT_LIGHTSABER.getName(), TileNames.PLAYER_RIGHT_LIGHTSABER.getTile());
         tileMap.put(TileNames.PLAYER_PICK_UP_LIGHTSABER.getName(), TileNames.PLAYER_PICK_UP_LIGHTSABER.getTile());
+        tileMap.put(TileNames.BLUE_WALL.getName(), TileNames.BLUE_WALL.getTile());
+        tileMap.put(TileNames.BLUE_WALL_PIPE.getName(), TileNames.BLUE_WALL_PIPE.getTile());
+        tileMap.put(TileNames.BLUE_WALL_PIPE_2.getName(), TileNames.BLUE_WALL_PIPE_2.getTile());
+        tileMap.put(TileNames.BLUE_WALL_BLOCK.getName(), TileNames.BLUE_WALL_BLOCK.getTile());
+        tileMap.put(TileNames.CARGO.getName(), TileNames.CARGO.getTile());
+        tileMap.put(TileNames.EXIT_1.getName(), TileNames.EXIT_1.getTile());
+        tileMap.put(TileNames.EXIT_2.getName(), TileNames.EXIT_2.getTile());
+        tileMap.put(TileNames.EXIT_3.getName(), TileNames.EXIT_3.getTile());
+        tileMap.put(TileNames.EXIT_4.getName(), TileNames.EXIT_4.getTile());
+        tileMap.put(TileNames.HYDROCAPSULE_1.getName(), TileNames.HYDROCAPSULE_1.getTile());
+        tileMap.put(TileNames.HYDROCAPSULE_2.getName(), TileNames.HYDROCAPSULE_2.getTile());
+        tileMap.put(TileNames.SINGLE_PIPE.getName(), TileNames.SINGLE_PIPE.getTile());
+        tileMap.put(TileNames.PIPE_END.getName(), TileNames.PIPE_END.getTile());
+        tileMap.put(TileNames.GREEN_ENEMY.getName(), TileNames.GREEN_ENEMY.getTile());
+        tileMap.put(TileNames.C3PO.getName(), TileNames.C3PO.getTile());
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {
