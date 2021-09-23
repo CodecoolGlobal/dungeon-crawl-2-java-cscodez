@@ -2,6 +2,7 @@ package com.codecool.dungeoncrawl.util;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.logic.items.BlueMilk;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
 import com.codecool.dungeoncrawl.logic.tiles.TileNames;
 import javafx.event.ActionEvent;
@@ -31,10 +32,17 @@ public class BuildUI {
                 ui.add(inventoryLabel, itemCol, row);
                 ui.add(useButton, buttonCol, row);
                 whatsOnUi.put(inventoryLabel, useButton);
-
                 row++;
+                if (item.equals(BlueMilk.getClassName())) {
+                    EventHandler<ActionEvent> useButtonEvent = e -> {
+                        ui.getChildren().remove(inventoryLabel);
+                        ui.getChildren().remove(useButton);
+                    };
+                    useButton.setOnAction(useButtonEvent);
+                }
             }
         }
+
         Button exitButton = new Button("exit");
         ui.add(exitButton, 0, row);
         EventHandler<ActionEvent> exitHandler = e -> {
