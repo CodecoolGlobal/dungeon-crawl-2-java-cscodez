@@ -47,7 +47,6 @@ public enum TileNames {
     /**
      * player specific tiles
      */
-    DEAD("dead", 9, 1),
     GRAVE(CellType.GRAVE.getTileName(), 9, 1),
     PLAYER_DOWN("player-down", 1, 1),
     PLAYER_UP("player-up", 2, 1),
