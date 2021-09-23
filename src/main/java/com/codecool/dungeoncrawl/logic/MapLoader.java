@@ -76,7 +76,10 @@ public class MapLoader {
                             cell.setType(CellType.FLOOR);
                             break;
                         case 's':
-                            cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map.txt"))
+                                cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map2.txt"))
+                                cell.setType(CellType.FLOOR2);
                             new Stormtrooper(cell);
                             break;
                         case '@':
@@ -84,7 +87,10 @@ public class MapLoader {
                             map.setPlayer(new Player(cell));
                             break;
                         case 'L':
-                            cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map.txt"))
+                                cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map2.txt"))
+                                cell.setType(CellType.FLOOR2);
                             new LightSaber(cell, "lightSaber");
                             break;
                         case 'd':
@@ -92,27 +98,45 @@ public class MapLoader {
                             new Door(cell, 1);
                             break;
                         case 'j':
-                            cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map.txt"))
+                                cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map2.txt"))
+                                cell.setType(CellType.FLOOR2);
                             new Jawa(cell);
                             break;
                         case 'G':
-                            cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map.txt"))
+                                cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map2.txt"))
+                                cell.setType(CellType.FLOOR2);
                             new GreenBrute(cell);
                             break;
                         case 'B':
-                            cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map.txt"))
+                                cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map2.txt"))
+                                cell.setType(CellType.FLOOR2);
                             new BlueMilk(cell, "blueMilk");
                             break;
                         case 'H':
-                            cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map.txt"))
+                                cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map2.txt"))
+                                cell.setType(CellType.FLOOR2);
                             new Hologram(cell, "hologram");
                             break;
                         case 'K':
-                            cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map.txt"))
+                                cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map2.txt"))
+                                cell.setType(CellType.FLOOR2);
                             new KeyCard(cell, "keyCard");
                             break;
                         case 'm':
-                            cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map.txt"))
+                                cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map2.txt"))
+                                cell.setType(CellType.FLOOR2);
                             new Mandalorian(cell);
                             break;
 
