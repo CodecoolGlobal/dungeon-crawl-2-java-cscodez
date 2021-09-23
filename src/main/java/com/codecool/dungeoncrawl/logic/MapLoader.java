@@ -56,6 +56,7 @@ public class MapLoader {
                             break;
                         case 'T':
                             cell.setType(CellType.EXIT_4);
+                            break;
                         case '1':
                             cell.setType(CellType.HYDROCAPSULE_1);
                             break;
@@ -113,6 +114,9 @@ public class MapLoader {
                         case 'm':
                             cell.setType(CellType.FLOOR);
                             new Mandalorian(cell);
+                            break;
+                        case 'e':
+                            cell.setType(CellType.ENTRY_POINT);
                             break;
 
                         default:

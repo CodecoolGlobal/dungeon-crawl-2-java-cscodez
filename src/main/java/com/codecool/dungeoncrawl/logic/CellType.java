@@ -20,7 +20,8 @@ public enum CellType {
     HYDROCAPSULE_2("hydrocapsule-2"),
     SINGLE_PIPE("single-pipe"),
     PIPE_END("pipe-end"),
-    BLUE_WALL_BLOCK("blue-wall-block");
+    BLUE_WALL_BLOCK("blue-wall-block"),
+    ENTRY_POINT("entry-point");
 
     private final String tileName;
 
