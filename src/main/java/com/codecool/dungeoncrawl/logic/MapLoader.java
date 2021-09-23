@@ -139,6 +139,13 @@ public class MapLoader {
                                 cell.setType(CellType.FLOOR2);
                             new Mandalorian(cell);
                             break;
+                        case 'F':
+                            if (mapSource.equals("/map.txt"))
+                                cell.setType(CellType.FLOOR);
+                            if (mapSource.equals("/map2.txt"))
+                                cell.setType(CellType.FLOOR2);
+                            new FallenJedi(cell);
+                            break;
 
                         default:
                             throw new RuntimeException("Unrecognized character: '" + line.charAt(x) + "'");
