@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.logic;
 import com.codecool.dungeoncrawl.logic.actors.Actor;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemies.Enemy;
+import com.codecool.dungeoncrawl.logic.actors.enemies.FlyingEnemy;
 import com.codecool.dungeoncrawl.util.Directions;
 
 public class GameMap {
@@ -43,8 +44,14 @@ public class GameMap {
                 if (actor instanceof Enemy) {
                     Enemy enemy = (Enemy)actor;
                     if (!enemy.getHasMoved()) {
-                        Directions direction = Directions.getRandomDirection();
-                        enemy.move(direction.getX(), direction.getY(), player);
+
+                        if (enemy instanceof FlyingEnemy) {
+                            enemy.move(player);
+                        } else {
+                            Directions direction = Directions.getRandomDirection();
+                            enemy.move(direction.getX(), direction.getY());
+                        }
+
                         enemy.swapHasMoved();
                     } else {
                         enemy.swapHasMoved();
