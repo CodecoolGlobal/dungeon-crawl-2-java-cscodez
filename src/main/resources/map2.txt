@@ -1,64 +1,51 @@
 50 50
-#########
-###@...###.
-####...###
-######.....#
-####.........#
-####.........#
-####.........#
-###..........#
-####.........#
-####.........#
-####........#
-####.........#
-####........#
-################            .                   ..
-.
-.
-.
-.
-.
-.
-.
-..
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-.
-..
-.
-.
-.
-.
-.
-.
-.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+***EXIT**                       ************
+*f|f@ff**********               *fffffffBBB*
+*f1ffff*fffBfffc*       *********fffcffGfBf*
+*f2ffff*ffffffcc*       *ffffGffffcccfKffff***
+*ffff*<*j********       ***fcfffffffccfffBfff*
+*fffsfffffff*             *ff*****************
+******ffffffA<<<<<<>*******ffffffffffffffffff*
+     *ff*fffffffffffffffffff******ffffccfff***
+     *ff*cfffff**********fff*    *ffffff****
+     *ff**ffcff*        *fff******fffffffff*
+     *fff*ffccf******<<<Afffffsfffff********
+     *****fffffffffffffffffffff******
+     *fffffffffmffffffffffff****
+     ******ff*************ff*
+          *ff*fffffffsffffff*
+          *ff*f************f*
+          *fffffffffffffffff*
+          *******ff*<<<*ff******
+***********ffjffffffffjffffffff*******************
+*1fff>fffffffffffjfffffffffjffffffffffffffffffff>*
+*2fffffcccccccffffffffccffjfffcccffffjffccffjfff**
+*ffffffccffjffffjffsffccfffffccfccffffffccffff**
+*ffjfffccjffjffffffffjfccjffccffccfjfffccffff**
+*ffffffcccccccffjffffffccfffccfBfccfffccffff**
+*fffjfffffffccffsffjffffccfccfffjccfffccfff**
+*fffffffffffccfffjffffffccfccfffffccfccfff**
+*ffjfffcccccccfffffffffffcccffjffffcccfff**
+*ffffffjfffffjfffffffffffffffffsffffffffff********
+*****************ffff***********f**ff****f*ffff*
+                *f****  *fffffffff**f*ffff*f*f**
+                *ff*    *********ffff*f****f*f*
+                **f******fffffff******ffffff*f*
+*****************ffffffffffffffffffff********f**
+*ffffffffffffsfffffffffffffffffffffffffffffffff*
+*fffffBfffffffffffffffffffffffffff*********EXIT***
+*ffffBBBfffsffff**********ffffffffffffff|||ffffff*
+*fffffBfffffffff*        *ffBfffffffffff|1|ffffff*
+**********ffffff*        *ffffffffffffff12|ffffff*
+         *ffffff**********ffffffBfffffff2f1ffffff*
+         *ffffffffffffffffffffffffffffffff2ffffff*
+         *ffff******ffffsfffffffffff*****fff******
+ ********ffff*    *******ffffffffff*   *****
+ *ffffffffffff*          *ffffffffff*********
+ ******fffffff*****      *fffffffffffffff|ff*
+      *fffffBfffff****   ***********ffsff|ff**
+*******ffffffffffffff*             *fffff|fff**
+*ffffsfffffffffffffff***************fffff_ffff*
+*ffffffffff*******fffffffffffBffffffffffffffff*
+*fmfffBffff*     *ffffsfffffffffffmffffffffff**
+************     *****************************

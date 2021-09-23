@@ -56,6 +56,7 @@ public class MapLoader {
                             break;
                         case 'T':
                             cell.setType(CellType.EXIT_4);
+                            break;
                         case '1':
                             cell.setType(CellType.HYDROCAPSULE_1);
                             break;
@@ -79,7 +80,7 @@ public class MapLoader {
                             new Stormtrooper(cell);
                             break;
                         case '@':
-                            cell.setType(CellType.FLOOR);
+                            cell.setType(CellType.FLOOR2);
                             map.setPlayer(new Player(cell));
                             break;
                         case 'L':
