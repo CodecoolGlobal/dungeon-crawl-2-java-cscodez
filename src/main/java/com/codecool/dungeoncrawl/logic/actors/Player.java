@@ -34,15 +34,4 @@ public class Player extends Actor {
         return tileName;
     }
 
-    public String inventoryForDisplay() {
-        StringBuilder displayString = new StringBuilder();
-        for (String item : inventory.keySet()) {
-            displayString.append(item);
-            displayString.append(" : ");
-            displayString.append(inventory.get(item));
-            displayString.append("\n");
-        }
-        return displayString.toString();
-
-    }
 }
