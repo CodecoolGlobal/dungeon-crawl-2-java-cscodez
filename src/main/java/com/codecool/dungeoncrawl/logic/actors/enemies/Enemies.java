@@ -1,10 +1,11 @@
 package com.codecool.dungeoncrawl.logic.actors.enemies;
 
 public enum Enemies {
-    STORMTROOPER("stormtrooper", 10, 2),
-    GREENBRUTE("greenBrute", 20, 10),
-    JAWA("jawa", 5, 2),
-    MANDALORIAN("mandalorian", 10, 5);
+    STORMTROOPER("stormtrooper", 20, 15),
+    GREENBRUTE("greenBrute", 30, 30),
+    JAWA("jawa", 10, 0),
+    MANDALORIAN("mandalorian", 70, 10),
+    FALLEN_JEDI("fallen-jedi", 70, 50);
 
 
     private final String tileName;
