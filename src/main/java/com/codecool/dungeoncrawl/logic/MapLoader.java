@@ -137,7 +137,7 @@ public class MapLoader {
                                 cell.setType(CellType.FLOOR);
                             if (mapSource.equals("/map2.txt"))
                                 cell.setType(CellType.FLOOR2);
-                            new Mandalorian(cell);
+                            new Mandalorian(cell, map.getPlayer());
                             break;
                         case 'F':
                             if (mapSource.equals("/map.txt"))
@@ -145,6 +145,9 @@ public class MapLoader {
                             if (mapSource.equals("/map2.txt"))
                                 cell.setType(CellType.FLOOR2);
                             new FallenJedi(cell);
+                            break;
+                        case 'e':
+                            cell.setType(CellType.ENTRY_POINT);
                             break;
 
                         default:

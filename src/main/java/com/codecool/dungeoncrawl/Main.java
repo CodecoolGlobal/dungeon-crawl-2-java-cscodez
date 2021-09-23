@@ -20,10 +20,10 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map2.txt");
+    GameMap map = MapLoader.loadMap("/map.txt");
     GridPane ui = new GridPane();
     BuildUI uiBuilder = new BuildUI();
-    int visibleSize = 30;
+    int visibleSize = 20;
     Canvas canvas = new Canvas(
             visibleSize * Tiles.TILE_WIDTH,
             visibleSize * Tiles.TILE_WIDTH);

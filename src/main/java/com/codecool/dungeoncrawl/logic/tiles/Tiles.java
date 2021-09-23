@@ -62,6 +62,7 @@ public class Tiles {
         tileMap.put(TileNames.PIPE_END.getName(), TileNames.PIPE_END.getTile());
         tileMap.put(TileNames.GREEN_ENEMY.getName(), TileNames.GREEN_ENEMY.getTile());
         tileMap.put(TileNames.C3PO.getName(), TileNames.C3PO.getTile());
+        tileMap.put(TileNames.ENTRY_POINT.getName(), TileNames.ENTRY_POINT.getTile());
     }
 
     public static void drawTile(GraphicsContext context, Drawable d, int x, int y) {

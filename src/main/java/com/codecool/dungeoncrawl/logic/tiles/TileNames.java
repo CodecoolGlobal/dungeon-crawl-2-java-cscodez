@@ -25,6 +25,7 @@ public enum TileNames {
     SINGLE_PIPE("single-pipe", 7,4),
     PIPE_END("pipe-end",8,4),
     BLUE_WALL_BLOCK("blue-wall-block",9,4),
+    ENTRY_POINT("entry-point", 1, 0),
 
     /**
      * characters

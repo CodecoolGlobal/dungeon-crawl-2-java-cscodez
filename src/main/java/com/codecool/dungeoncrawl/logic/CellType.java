@@ -20,7 +20,8 @@ public enum CellType {
     HYDROCAPSULE_2("hydrocapsule-2", false),
     SINGLE_PIPE("single-pipe", false),
     PIPE_END("pipe-end", false),
-    BLUE_WALL_BLOCK("blue-wall-block", false);
+    BLUE_WALL_BLOCK("blue-wall-block", false),
+    ENTRY_POINT("entry-point", true);
 
     private final String tileName;
     private final boolean canMoveOn;
