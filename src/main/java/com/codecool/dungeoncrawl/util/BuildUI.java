@@ -56,8 +56,8 @@ public class BuildUI {
             for (Label label:whatsOnUi.keySet()) {
                 ui.getChildren().remove(label);
                 ui.getChildren().remove(whatsOnUi.get(label));
-                ui.getChildren().remove(exitButton);
             }
+            ui.getChildren().remove(exitButton);
         };
         exitButton.setOnAction(exitHandler);
 
