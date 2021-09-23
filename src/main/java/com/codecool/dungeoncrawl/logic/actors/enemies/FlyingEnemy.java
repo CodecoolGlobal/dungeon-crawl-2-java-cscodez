@@ -2,20 +2,13 @@ package com.codecool.dungeoncrawl.logic.actors.enemies;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.util.Directions;
 
-public class FlyingEnemy extends Enemy {
+public abstract class FlyingEnemy extends Enemy {
 
     public FlyingEnemy(Cell cell) {
         super(cell);
-        health = Enemies.FLYINGENEMY.getHealth();
-        damage = Enemies.FLYINGENEMY.getDamage();
     }
 
-    @Override
-    public String getTileName() {
-        return Enemies.FLYINGENEMY.getTileName();
-    }
 
     public void move(Player player) {
 

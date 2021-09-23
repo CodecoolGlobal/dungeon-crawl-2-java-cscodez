@@ -43,7 +43,6 @@ public class GameMap {
                 Actor actor = cell.getActor();
                 if (actor instanceof Enemy) {
                     Enemy enemy = (Enemy)actor;
-                    System.out.println(enemy.getHasMoved());
                     if (!enemy.getHasMoved()) {
 
                         if (enemy instanceof FlyingEnemy) {
