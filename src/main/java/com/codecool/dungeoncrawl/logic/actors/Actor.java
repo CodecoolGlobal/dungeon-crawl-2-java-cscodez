@@ -3,13 +3,13 @@ package com.codecool.dungeoncrawl.logic.actors;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.Drawable;
+import com.codecool.dungeoncrawl.logic.actors.enemies.Enemy;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
 
 public abstract class Actor implements Drawable {
     protected String tileName;
     private Cell cell;
     protected int health = 10;
-    protected boolean isEnemy;
     protected int damage;
     private Weapon weapon;
 
@@ -34,10 +34,10 @@ public abstract class Actor implements Drawable {
         boolean playerMoves = this instanceof Player;
 
         if (playerMoves) {
-            if (nextCell.getActor().isEnemy()) {
+            if (nextCell.getActor() instanceof Enemy) {
                 attack(nextCell.getActor());
             }
-        } else if (this.isEnemy && nextCell.getActor() instanceof Player) {
+        } else if (this instanceof Enemy && nextCell.getActor() instanceof Player) {
             attack(nextCell.getActor());
         }
     }
@@ -62,10 +62,6 @@ public abstract class Actor implements Drawable {
 
     private boolean isActor(Cell cell) {
         return cell.getActor() != null;
-    }
-
-    private boolean isEnemy() {
-        return this.isEnemy;
     }
 
     public int getDamage() {

@@ -12,7 +12,6 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         tileName = "player-down";
-        isEnemy = false;
         health = 10;
         damage = 5;
         this.inventory = new HashMap<>();
