@@ -9,7 +9,7 @@ public enum CellType {
     OPENED_DOOR("opened-door", true),
     BLUE_WALL("blue-wall", false),
     BLUE_WALL_PIPE("blue-wall-pipe", false),
-    BLUE_WALL_PIPE_2("blue-wall-pipe", false),
+    BLUE_WALL_PIPE_2("blue-wall-pipe-2", false),
     FLOOR2("floor2", true),
     CARGO("cargo", false),
     EXIT_1("exit-1", false),
