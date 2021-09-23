@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 public class Main extends Application {
     GameMap map = MapLoader.loadMap("/map.txt");
     GridPane ui = new GridPane();
+    BuildUI uiBuilder = new BuildUI();
     int visibleSize = 10;
     Canvas canvas = new Canvas(
             visibleSize * Tiles.TILE_WIDTH,
@@ -106,7 +107,7 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null ) {
                     if (cell.getItem() != null && cell.getActor() instanceof Player) {
-                        buttonHandler(this.ui, cell);
+                        uiBuilder.buttonHandler(this.ui, cell, map, inventoryLabel);
                     }
                     Tiles.drawTile(context, cell.getActor(), k, j);
 
@@ -127,34 +128,7 @@ public class Main extends Application {
         }
     }
 
-    private void buttonHandler( GridPane ui, Cell cell) {
-        Button yesButton = new Button("Pick up\n" + cell.getItem().getName());
-        Button noButton = new Button("Don't pickup\n" + cell.getItem().getName());
-        EventHandler<ActionEvent> yesEvent = e -> {
-            map.getPlayer().setItemToInventory(cell.getItem());
 
-            if (cell.getItem() instanceof Weapon) {
-                map.getPlayer().setWeapon((Weapon) cell.getItem());
-            }
-
-            cell.setItem(null);
-            ui.getChildren().remove(yesButton);
-            ui.getChildren().remove(noButton);
-            inventoryLabel.setText(BuildUI.inventoryForDisplay(map.getPlayer().getInventory()));
-
-        };
-        EventHandler<ActionEvent> noEvent = e -> {
-            System.out.println("helloNo");
-            ui.getChildren().remove(yesButton);
-            ui.getChildren().remove(noButton);
-        };
-
-        yesButton.setOnAction(yesEvent);
-        noButton.setOnAction(noEvent);
-        ui.add(yesButton, 0, 1);
-        ui.add(noButton, 1, 1);
-
-    }
 
     private boolean checkIfDoorIsOpen() {
         for (Cell[] cellRow : map.getCells()) {
