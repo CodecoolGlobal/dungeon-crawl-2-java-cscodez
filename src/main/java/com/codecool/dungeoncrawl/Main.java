@@ -125,7 +125,6 @@ public class Main extends Application {
             Player player = map.getPlayer();
             renderNewMap(player);
         }
-        System.out.println(map.getPlayer().getInventory().toString());
     }
 
     private void buttonHandler( GridPane ui, Cell cell) {
@@ -173,7 +172,6 @@ public class Main extends Application {
         Cell playerCell = map.getPlayer().getCell();
         player.setCell(playerCell);
         map.setPlayer(player);
-        System.out.println(map.getPlayer().getInventory().toString());
     }
 }
 
