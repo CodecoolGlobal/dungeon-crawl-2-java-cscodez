@@ -107,4 +107,6 @@ public abstract class Actor implements Drawable {
     public void setTileName(String tileName) {
         this.tileName = tileName;
     }
+
+    public void setCell(Cell cell){this.cell = cell;}
 }

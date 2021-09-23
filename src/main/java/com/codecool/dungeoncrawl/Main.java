@@ -119,8 +119,10 @@ public class Main extends Application {
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
         if(checkIfDoorIsOpen()){
-            renderNewMap();
+            Player player = map.getPlayer();
+            renderNewMap(player);
         }
+        System.out.println(map.getPlayer().getInventory().toString());
     }
 
     private void buttonHandler( GridPane ui, Cell cell) {
@@ -158,8 +160,12 @@ public class Main extends Application {
         return false;
     }
 
-    private void renderNewMap(){
+    private void renderNewMap(Player player){
         map = MapLoader.loadMap("/map2.txt");
+        Cell playerCell = map.getPlayer().getCell();
+        player.setCell(playerCell);
+        map.setPlayer(player);
+        System.out.println(map.getPlayer().getInventory().toString());
     }
 }
 
