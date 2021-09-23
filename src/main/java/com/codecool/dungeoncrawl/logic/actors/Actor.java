@@ -112,6 +112,7 @@ public abstract class Actor implements Drawable {
         this.tileName = tileName;
     }
 
+    public void setCell(Cell cell){this.cell = cell;}
     public Weapon getWeapon() {
         return weapon;
     }
