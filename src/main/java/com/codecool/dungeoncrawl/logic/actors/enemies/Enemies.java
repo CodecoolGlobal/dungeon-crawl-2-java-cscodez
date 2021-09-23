@@ -1,15 +1,17 @@
 package com.codecool.dungeoncrawl.logic.actors.enemies;
 
 public enum Enemies {
-    STORMTROOPER(10, 2),
-    GREENBRUTE(20, 10),
-    JAWA(5, 2),
-    MANDALORIAN(10, 5);
+    STORMTROOPER("stormtrooper", 10, 2),
+    GREENBRUTE("greenBrute", 20, 10),
+    JAWA("jawa", 5, 2),
+    MANDALORIAN("mandalorian", 10, 5);
 
+    private final String tileName;
     private final int health;
     private final int damage;
 
-    private Enemies(int health, int damage) {
+    Enemies(String tileName, int health, int damage) {
+        this.tileName = tileName;
         this.health = health;
         this.damage = damage;
     }
@@ -20,5 +22,9 @@ public enum Enemies {
 
     public int getDamage() {
         return damage;
+    }
+
+    public String getTileName() {
+        return tileName;
     }
 }

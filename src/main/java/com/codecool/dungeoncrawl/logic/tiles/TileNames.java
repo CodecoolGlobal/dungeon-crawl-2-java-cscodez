@@ -1,15 +1,19 @@
 package com.codecool.dungeoncrawl.logic.tiles;
 
+import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.CellType;
+import com.codecool.dungeoncrawl.logic.actors.enemies.Enemies;
+
 public enum TileNames {
     /**
      * map tiles
-     */
-    EMPTY("empty", 0, 0),
-    WALL("wall", 2, 0),
+     */  
+    EMPTY(CellType.EMPTY.getTileName(), 0, 0),
+    WALL(CellType.WALL.getTileName(), 2, 0),
+    FLOOR(CellType.FLOOR.getTileName(), 5, 0 ),
     BLUE_WALL("blue-wall", 7,0),
     BLUE_WALL_PIPE("blue-wall-pipe", 8,0),
     BLUE_WALL_PIPE_2("blue-wall-pipe", 9,0),
-    FLOOR("floor", 5, 0 ),
     FLOOR2("floor2", 10, 0),
     CARGO("cargo", 0,4),
     EXIT_1("exit-1", 1,4),
@@ -25,10 +29,10 @@ public enum TileNames {
     /**
      * characters
      */
-    JAWA("jawa", 0, 2),
-    STORMTROOPER("stormtrooper", 3,2),
-    GREEN_BRUTE("greenBrute", 1,2),
-    MANDALORIAN("mandalorian", 2,2),
+    JAWA(Enemies.JAWA.getTileName(), 0, 2),
+    STORMTROOPER(Enemies.STORMTROOPER.getTileName(), 3,2),
+    GREEN_BRUTE(Enemies.GREENBRUTE.getTileName(), 1,2),
+    MANDALORIAN(Enemies.MANDALORIAN.getTileName(), 2,2),
     GREEN_ENEMY("green-enemy", 4,2),
     C3PO("c3po", 5,3),
     /**
@@ -44,6 +48,7 @@ public enum TileNames {
      * player specific tiles
      */
     DEAD("dead", 9, 1),
+    GRAVE(CellType.GRAVE.getTileName(), 9, 1),
     PLAYER_DOWN("player-down", 1, 1),
     PLAYER_UP("player-up", 2, 1),
     PLAYER_LEFT("player-left", 4, 1),
