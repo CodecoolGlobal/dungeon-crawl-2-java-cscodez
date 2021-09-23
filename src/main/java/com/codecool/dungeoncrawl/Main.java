@@ -5,17 +5,13 @@ import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.logic.items.Weapon;
 import com.codecool.dungeoncrawl.logic.tiles.Tiles;
 import com.codecool.dungeoncrawl.util.BuildUI;
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
@@ -24,16 +20,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map.txt");
+    GameMap map = MapLoader.loadMap("/map2.txt");
     GridPane ui = new GridPane();
     BuildUI uiBuilder = new BuildUI();
-    int visibleSize = 10;
+    int visibleSize = 30;
     Canvas canvas = new Canvas(
             visibleSize * Tiles.TILE_WIDTH,
             visibleSize * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
-    Label inventoryLabel = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -48,8 +43,8 @@ public class Main extends Application {
         this.ui.add(new Label("Health: "), 0, 0);
         this.ui.add(healthLabel, 1, 0);
 
-
-        this.ui.add(inventoryLabel, 0, 3);
+        //!!!!!!
+        //uiBuilder.inventoryDisplayer();
 
         BorderPane borderPane = new BorderPane();
 
@@ -84,6 +79,9 @@ public class Main extends Application {
                     map.getPlayer().setTileName("player-right");
                     map.getPlayer().move(1, 0);
                     break;
+                case I:
+                    uiBuilder.inventoryDisplayer(ui, map, healthLabel);
+
             }
         }
         map.moveEnemies();
@@ -110,7 +108,7 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null ) {
                     if (cell.getItem() != null && cell.getActor() instanceof Player) {
-                        uiBuilder.buttonHandler(this.ui, cell, map, inventoryLabel);
+                        uiBuilder.pickUpButtonHandler(this.ui, cell, map);
                     }
                     Tiles.drawTile(context, cell.getActor(), k, j);
 
