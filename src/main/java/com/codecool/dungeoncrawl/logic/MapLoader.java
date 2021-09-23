@@ -30,6 +30,47 @@ public class MapLoader {
                         case '#':
                             cell.setType(CellType.WALL);
                             break;
+                        case '*':
+                            cell.setType(CellType.BLUE_WALL);
+                            break;
+                        case '<':
+                            cell.setType(CellType.BLUE_WALL_PIPE);
+                            break;
+                        case '>':
+                            cell.setType(CellType.BLUE_WALL_PIPE_2);
+                            break;
+                        case 'f':
+                            cell.setType(CellType.FLOOR2);
+                            break;
+                        case 'c':
+                            cell.setType(CellType.CARGO);
+                            break;
+                        case 'E':
+                            cell.setType(CellType.EXIT_1);
+                            break;
+                        case 'X':
+                            cell.setType(CellType.EXIT_2);
+                            break;
+                        case 'I':
+                            cell.setType(CellType.EXIT_3);
+                            break;
+                        case 'T':
+                            cell.setType(CellType.EXIT_4);
+                        case '1':
+                            cell.setType(CellType.HYDROCAPSULE_1);
+                            break;
+                        case '2':
+                            cell.setType(CellType.HYDROCAPSULE_2);
+                            break;
+                        case '|':
+                            cell.setType(CellType.SINGLE_PIPE);
+                            break;
+                        case '_':
+                            cell.setType(CellType.PIPE_END);
+                            break;
+                        case 'A':
+                            cell.setType(CellType.BLUE_WALL_BLOCK);
+                            break;
                         case '.':
                             cell.setType(CellType.FLOOR);
                             break;
