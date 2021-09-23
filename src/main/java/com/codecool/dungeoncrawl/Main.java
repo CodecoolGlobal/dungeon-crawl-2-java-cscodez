@@ -5,6 +5,8 @@ import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.logic.items.Weapon;
+import com.codecool.dungeoncrawl.logic.tiles.Tiles;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -130,6 +132,11 @@ public class Main extends Application {
         Button noButton = new Button("Don't pickup\n" + cell.getItem().getName());
         EventHandler<ActionEvent> yesEvent = e -> {
             map.getPlayer().setItemToInventory(cell.getItem());
+
+            if (cell.getItem() instanceof Weapon) {
+                map.getPlayer().setWeapon((Weapon) cell.getItem());
+            }
+
             cell.setItem(null);
             ui.getChildren().remove(yesButton);
             ui.getChildren().remove(noButton);
