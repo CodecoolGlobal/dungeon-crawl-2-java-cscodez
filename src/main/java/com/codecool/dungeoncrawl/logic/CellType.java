@@ -1,34 +1,37 @@
 package com.codecool.dungeoncrawl.logic;
 
 public enum CellType {
-    EMPTY("empty"),
-    FLOOR("floor"),
-    WALL("wall"),
-    GRAVE("dead"),
-    CLOSED_DOOR("closed-door"),
-    OPENED_DOOR("opened-door"),
-    BLUE_WALL("blue-wall"),
-    BLUE_WALL_PIPE("blue-wall-pipe"),
-    BLUE_WALL_PIPE_2("blue-wall-pipe"),
-    FLOOR2("floor2"),
-    CARGO("cargo"),
-    EXIT_1("exit-1"),
-    EXIT_2("exit-2"),
-    EXIT_3("exit-3"),
-    EXIT_4("exit-4"),
-    HYDROCAPSULE_1("hydrocapsule-1"),
-    HYDROCAPSULE_2("hydrocapsule-2"),
-    SINGLE_PIPE("single-pipe"),
-    PIPE_END("pipe-end"),
-    BLUE_WALL_BLOCK("blue-wall-block");
+    EMPTY("empty", false),
+    FLOOR("floor", true),
+    WALL("wall", false),
+    GRAVE("dead", false),
+    CLOSED_DOOR("closed-door", true),
+    OPENED_DOOR("opened-door", true),
+    BLUE_WALL("blue-wall", false),
+    BLUE_WALL_PIPE("blue-wall-pipe", false),
+    BLUE_WALL_PIPE_2("blue-wall-pipe", false),
+    FLOOR2("floor2", true),
+    CARGO("cargo", false),
+    EXIT_1("exit-1", false),
+    EXIT_2("exit-2", false),
+    EXIT_3("exit-3", false),
+    EXIT_4("exit-4", false),
+    HYDROCAPSULE_1("hydrocapsule-1", false),
+    HYDROCAPSULE_2("hydrocapsule-2", false),
+    SINGLE_PIPE("single-pipe", false),
+    PIPE_END("pipe-end", false),
+    BLUE_WALL_BLOCK("blue-wall-block", false);
 
     private final String tileName;
+    private final boolean canMoveOn;
 
-    CellType(String tileName) {
+    CellType(String tileName, boolean canMoveOn) {
         this.tileName = tileName;
+        this.canMoveOn = canMoveOn;
     }
 
     public String getTileName() {
         return tileName;
     }
+    public boolean getCanMoveOn() { return canMoveOn; }
 }

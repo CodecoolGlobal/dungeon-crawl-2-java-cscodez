@@ -18,6 +18,9 @@ public class Cell implements Drawable {
         this.type = type;
     }
 
+    public boolean canMoveOnCell() {
+        return type.getCanMoveOn();
+    }
 
     public CellType getType() {
         return type;
