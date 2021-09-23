@@ -32,7 +32,7 @@ public class FlyingEnemy extends Enemy {
         int Ydistance = Math.abs(playerY - thisY);
 
         if (Xdistance + Ydistance == 1) {
-            System.out.println("Attack!!!");
+            attack(player);
             return;
         }
 

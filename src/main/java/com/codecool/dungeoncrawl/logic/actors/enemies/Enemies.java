@@ -5,7 +5,7 @@ public enum Enemies {
     GREENBRUTE("greenBrute", 20, 10),
     JAWA("jawa", 5, 2),
     MANDALORIAN("mandalorian", 10, 5),
-    FLYINGENEMY("flyingEnemy", 5, 5);
+    FLYINGENEMY("flyingEnemy", 6, 5);
 
 
     private final String tileName;

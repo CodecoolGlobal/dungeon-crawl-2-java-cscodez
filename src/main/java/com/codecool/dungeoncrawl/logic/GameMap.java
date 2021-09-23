@@ -43,6 +43,7 @@ public class GameMap {
                 Actor actor = cell.getActor();
                 if (actor instanceof Enemy) {
                     Enemy enemy = (Enemy)actor;
+                    System.out.println(enemy.getHasMoved());
                     if (!enemy.getHasMoved()) {
 
                         if (enemy instanceof FlyingEnemy) {
@@ -52,9 +53,7 @@ public class GameMap {
                             enemy.move(direction.getX(), direction.getY());
                         }
 
-                        enemy.swapHasMoved();
-                    } else {
-                        enemy.swapHasMoved();
+                        enemy.setHasMoved(true);
                     }
 
                 }
@@ -94,5 +93,15 @@ public class GameMap {
             startY = height - visibleSize;
         }
         return new int[]{startX, startY};
+    }
+
+    public void resetEnemiesAttack() {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                if (cell.getActor() instanceof Enemy) {
+                    ((Enemy) cell.getActor()).setHasMoved(false);
+                }
+            }
+        }
     }
 }
