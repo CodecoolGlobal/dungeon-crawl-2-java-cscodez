@@ -9,8 +9,12 @@ public class Jawa extends Enemy {
         damage = Enemies.JAWA.getDamage();
     }
 
+    public void move(int dx, int dy) {
+        // hehe :3
+    }
+
     @Override
     public String getTileName() {
-        return "jawa";
+        return Enemies.JAWA.getTileName();
     }
 }
