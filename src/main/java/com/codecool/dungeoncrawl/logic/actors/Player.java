@@ -12,7 +12,7 @@ public class Player extends Actor {
     public Player(Cell cell) {
         super(cell);
         tileName = "player-down";
-        health = 10;
+        health = 1000;
         damage = 5;
         this.inventory = new HashMap<>();
     }
