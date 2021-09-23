@@ -87,7 +87,9 @@ public class Main extends Application {
         }
         map.moveEnemies();
         if (!map.getPlayer().isAlive()) {
+            map.getPlayer().getCell().setType(CellType.GRAVE);
             map.getPlayer().setTileName("dead");
+
         }
         refresh();
     }
