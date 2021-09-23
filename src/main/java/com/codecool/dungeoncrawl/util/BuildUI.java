@@ -3,6 +3,7 @@ package com.codecool.dungeoncrawl.util;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
+import com.codecool.dungeoncrawl.logic.tiles.TileNames;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
@@ -17,18 +18,20 @@ public class BuildUI {
         int buttonCol = 1;
         int row = 3;
         for (String item : hashMap.keySet()) {
-            StringBuilder displayString = new StringBuilder();
-            Label inventoryLabel = new Label();
-            Button useButton = new Button("use");
-            displayString.append(item);
-            displayString.append(" : ");
-            displayString.append(hashMap.get(item));
-            displayString.append("\n");
-            inventoryLabel.setText(displayString.toString());
-            ui.add(inventoryLabel, itemCol, row);
-            ui.add(useButton, buttonCol, row);
+            if (!item.equals("Lightsaber")) {
+                StringBuilder displayString = new StringBuilder();
+                Label inventoryLabel = new Label();
+                Button useButton = new Button("use");
+                displayString.append(item);
+                displayString.append(" : ");
+                displayString.append(hashMap.get(item));
+                displayString.append("\n");
+                inventoryLabel.setText(displayString.toString());
+                ui.add(inventoryLabel, itemCol, row);
+                ui.add(useButton, buttonCol, row);
 
-            row++;
+                row++;
+            }
         }
 
     }
