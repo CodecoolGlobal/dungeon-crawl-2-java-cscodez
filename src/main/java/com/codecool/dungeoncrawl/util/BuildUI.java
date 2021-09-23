@@ -2,6 +2,8 @@ package com.codecool.dungeoncrawl.util;
 
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.logic.actors.Player;
+import com.codecool.dungeoncrawl.logic.items.BlueMilk;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
 import com.codecool.dungeoncrawl.logic.tiles.TileNames;
 import javafx.event.ActionEvent;
@@ -13,10 +15,13 @@ import javafx.scene.layout.GridPane;
 import java.util.HashMap;
 
 public class BuildUI {
-    public void inventoryDisplayer(HashMap<String, Integer> hashMap, GridPane ui) {
+
+    public void inventoryDisplayer(GridPane ui, GameMap map, Label healthLabel) {
         int itemCol = 0;
         int buttonCol = 1;
         int row = 3;
+        Player player = map.getPlayer();
+        HashMap<String, Integer> hashMap= player.getInventory();
         HashMap<Label, Button> whatsOnUi= new HashMap<>();
         for (String item : hashMap.keySet()) {
             if (!item.equals("Lightsaber")) {
@@ -31,10 +36,20 @@ public class BuildUI {
                 ui.add(inventoryLabel, itemCol, row);
                 ui.add(useButton, buttonCol, row);
                 whatsOnUi.put(inventoryLabel, useButton);
-
                 row++;
+                if (item.equals(BlueMilk.getClassName())) {
+                    EventHandler<ActionEvent> useButtonEvent = e -> {
+                        player.setHealth(player.getHealth()+BlueMilk.getHealing());
+                        healthLabel.setText("" + map.getPlayer().getHealth());
+                        ui.getChildren().remove(inventoryLabel);
+                        ui.getChildren().remove(useButton);
+
+                    };
+                    useButton.setOnAction(useButtonEvent);
+                }
             }
         }
+
         Button exitButton = new Button("exit");
         ui.add(exitButton, 0, row);
         EventHandler<ActionEvent> exitHandler = e -> {
