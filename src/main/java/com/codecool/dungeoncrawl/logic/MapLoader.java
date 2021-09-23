@@ -112,7 +112,7 @@ public class MapLoader {
                             break;
                         case 'm':
                             cell.setType(CellType.FLOOR);
-                            new Mandalorian(cell);
+                            new Mandalorian(cell, map.getPlayer());
                             break;
 
                         default:
