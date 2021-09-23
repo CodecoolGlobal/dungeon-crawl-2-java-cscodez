@@ -20,16 +20,15 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map3.txt");
+    GameMap map = MapLoader.loadMap("/map.txt");
     GridPane ui = new GridPane();
     BuildUI uiBuilder = new BuildUI();
-    int visibleSize = 20;
+    int visibleSize = 10;
     Canvas canvas = new Canvas(
             visibleSize * Tiles.TILE_WIDTH,
             visibleSize * Tiles.TILE_WIDTH);
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
-    Label inventoryLabel = new Label();
 
     public static void main(String[] args) {
         launch(args);
@@ -44,8 +43,8 @@ public class Main extends Application {
         this.ui.add(new Label("Health: "), 0, 0);
         this.ui.add(healthLabel, 1, 0);
 
-
-        this.ui.add(inventoryLabel, 0, 3);
+        //!!!!!!
+        //uiBuilder.inventoryDisplayer();
 
         BorderPane borderPane = new BorderPane();
 
@@ -80,6 +79,9 @@ public class Main extends Application {
                     map.getPlayer().setTileName("player-right");
                     map.getPlayer().move(1, 0);
                     break;
+                case I:
+                    uiBuilder.inventoryDisplayer(map.getPlayer().getInventory(),ui);
+
             }
         }
         map.moveEnemies();
@@ -106,7 +108,7 @@ public class Main extends Application {
                 Cell cell = map.getCell(x, y);
                 if (cell.getActor() != null ) {
                     if (cell.getItem() != null && cell.getActor() instanceof Player) {
-                        uiBuilder.buttonHandler(this.ui, cell, map, inventoryLabel);
+                        uiBuilder.pickUpButtonHandler(this.ui, cell, map);
                     }
                     Tiles.drawTile(context, cell.getActor(), k, j);
 

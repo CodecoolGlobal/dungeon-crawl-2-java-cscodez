@@ -13,7 +13,7 @@ public enum TileNames {
     FLOOR(CellType.FLOOR.getTileName(), 5, 0 ),
     BLUE_WALL("blue-wall", 7,0),
     BLUE_WALL_PIPE("blue-wall-pipe", 8,0),
-    BLUE_WALL_PIPE_2("blue-wall-pipe", 9,0),
+    BLUE_WALL_PIPE_2("blue-wall-pipe-2", 9,0),
     FLOOR2("floor2", 10, 0),
     CARGO("cargo", 0,4),
     EXIT_1("exit-1", 1,4),
