@@ -89,13 +89,4 @@ public class BuildUI {
         ui.add(noButton, 1, 1);
 
     }
-
-    public void itemButtonHandler(GridPane ui, Cell cell, GameMap map) {
-        Button useButton = new Button("use");
-        EventHandler<ActionEvent> useEvent = e -> {
-            System.out.println("hello");
-        };
-        useButton.setOnAction(useEvent);
-        //ui.add();
-    }
 }
