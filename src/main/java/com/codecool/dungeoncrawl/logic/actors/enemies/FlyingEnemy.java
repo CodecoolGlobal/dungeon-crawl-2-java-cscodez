@@ -4,9 +4,10 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 
 public abstract class FlyingEnemy extends Enemy {
-
-    public FlyingEnemy(Cell cell) {
+    protected Player player;
+    public FlyingEnemy(Cell cell, Player player) {
         super(cell);
+        this.player = player;
     }
 
 
@@ -33,29 +34,25 @@ public abstract class FlyingEnemy extends Enemy {
             if (playerX > thisX) {
                 Cell nextCell = cell.getNeighbor(1, 0);
 
-                checkNextCell(cell, nextCell);
+                moveToNextCell(cell, nextCell);
             }
             else {
                 Cell nextCell = cell.getNeighbor( -1, 0);
-                checkNextCell(cell, nextCell);
+                moveToNextCell(cell, nextCell);
             }
         } else {
             if (playerY > getY()) {
                 Cell nextCell = cell.getNeighbor(0,  1);
-                checkNextCell(cell, nextCell);
+                moveToNextCell(cell, nextCell);
             }
             else {
                 Cell nextCell = cell.getNeighbor(0, -1);
-                checkNextCell(cell, nextCell);
+                moveToNextCell(cell, nextCell);
             }
         }
-
-
-
-
     }
 
-    private void checkNextCell(Cell thisCell, Cell nextCell) {
+    private void moveToNextCell(Cell thisCell, Cell nextCell) {
         if (nextCell.getActor() == null) {
             thisCell.setActor(null);
             this.setCell(nextCell);
