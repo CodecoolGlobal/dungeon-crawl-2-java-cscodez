@@ -90,6 +90,7 @@ public class Main extends Application {
             map.getPlayer().setTileName("dead");
 
         }
+        map.resetEnemiesAttack();
         refresh();
     }
 

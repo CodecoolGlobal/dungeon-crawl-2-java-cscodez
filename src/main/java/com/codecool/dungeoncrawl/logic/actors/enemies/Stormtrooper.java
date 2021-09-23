@@ -11,6 +11,6 @@ public class Stormtrooper extends Enemy {
 
     @Override
     public String getTileName() {
-        return "stormtrooper";
+        return Enemies.STORMTROOPER.getTileName();
     }
 }

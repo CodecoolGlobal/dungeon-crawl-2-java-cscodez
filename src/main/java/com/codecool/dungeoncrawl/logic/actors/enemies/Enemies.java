@@ -6,6 +6,7 @@ public enum Enemies {
     JAWA("jawa", 5, 2),
     MANDALORIAN("mandalorian", 10, 5);
 
+
     private final String tileName;
     private final int health;
     private final int damage;
