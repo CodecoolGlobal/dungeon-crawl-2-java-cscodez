@@ -1,25 +1,25 @@
 50 50
 ***EXIT**                       ************
 *f|f@ff**********               *fffffffBBB*
-*f1fBBB*fffBfffc*       *********fffcffGfBf*
+*f1ffff*fffBfffc*       *********fffcffGfBf*
 *f2ffff*fffBBfcc*       *ffffGffffcccfKffff***
-*ffff*<*j********       ***fcfffffffccfffBfff*
-*fffsfffffff*             *ff*****************
-******ffffffA<<<<<<>*******ffffBBBff1ffffffff*
+*ffff*<*j********       ***fcffFffffccfffBfff*
+*fffsfffff11*             *ff*****************
+******ffff22A<<<<<<>*******ffffBBBff1ffffffmf*
      *ff*ffffBfffffffffBffff******ff2fccfff***
      *ff*cfffff**********fff*    *ffffff****
      *ff**ffcff*        *fff******ffffBBfff*
      *fff*ffccf******<<<Afffffsfffff********
      ****AfffffffffGfffffffffff*<<***
-     *fffffffffmffffffffffff****
+     *fffffffffmfffffffffFff****
      *<<<>*ff*************f1*
           *ff*fffffffsfffff2*
           *ff*f************f*
-          *ffBBfffffffffffff*
+          *fffffffffffffffff*
           *******ff*<<<*ff******
-***********ffjffffffffjffffffff*******************
-*1fff>fffffffffffjfffffffffjffffffffff_fffffffff>*
-*2fffffcccccccffffffffccffjfffcccffffjffccffjfff**
+***********ffjfFffffffjffffffff*******************
+*111f>fffffffffffjfffffffffjffffffffff_fffffffff>*
+*222fffcccccccffffffffccffjfffcccffffjffccffjfff**
 *ffBBffccffjffffjffsffccfffffccfccffffffccffff**
 *ffjfffccjffjffffffffjfccjffccffccfjfffccffff**
 *ffffffcccccccffjffffffccfffccfBfccfffccffff**
@@ -34,8 +34,8 @@
 *************<<<>ffffffffffffffffffff********f**
 *1ffffff|ffffsfffffffffffffffffffffffffffffffff*
 *2ffffBf1fffffffBBffffffffffffffff*********EXIT***
-*ffffBBB2ffsffff**********ffffffff|fffff|||ffffff*
-*fffffBfffffffff*        *ffBfffff|fffff|1|ffffff*
+*ffffBBB2ffsffff**********ffffffff|fffff|||ff1111*
+*fffffBFffffffff*        *ffBfffff|fffff|1|ff2222*
 **********ffffff*        *ffffffff|fffff12|ffffff*
          *ffffff**********ffffffBf|fffff2f1ffffff*
          *ffffffffffffffffffffffff_fffffff2fffff_*
