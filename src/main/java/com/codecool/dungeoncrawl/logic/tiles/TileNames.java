@@ -33,7 +33,7 @@ public enum TileNames {
     STORMTROOPER(Enemies.STORMTROOPER.getTileName(), 3,2),
     GREEN_BRUTE(Enemies.GREENBRUTE.getTileName(), 1,2),
     MANDALORIAN(Enemies.MANDALORIAN.getTileName(), 2,2),
-    GREEN_ENEMY("green-enemy", 4,2),
+    GREEN_ENEMY("fallen-jedi", 4,2),
     C3PO("c3po", 5,3),
     /**
      * items
