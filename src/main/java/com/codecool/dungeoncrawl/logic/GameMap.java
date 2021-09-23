@@ -58,4 +58,26 @@ public class GameMap {
     public Cell[][] getCells() {
         return cells;
     }
+
+    public int[] getPlayerCoordinate(int visibleSize){
+        int playerX = player.getX();
+        int playerY = player.getY();
+
+        int size = (visibleSize -1 )/ 2;
+
+        int startX = playerX - size;
+        int startY = playerY - size;
+
+        if(startX < 0){
+            startX = 0;
+        }else if(playerX + size >= width - 1) {
+            startX = width - visibleSize;
+        }
+        if(startY < 0){
+            startY = 0;
+        }else if(playerY + size >= height - 1){
+            startY = height - visibleSize;
+        }
+        return new int[]{startX, startY};
+    }
 }
