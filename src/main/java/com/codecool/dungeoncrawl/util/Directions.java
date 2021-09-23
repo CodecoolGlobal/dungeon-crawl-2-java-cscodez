@@ -11,7 +11,10 @@ public enum Directions {
     }
 
     public static Directions getRandomDirection() {
-        return values()[Randomizer.nextInt(values().length)];
+
+        int randomIndex = Randomizer.nextInt(values().length);
+
+        return values()[randomIndex];
     }
 
     public int getX() {

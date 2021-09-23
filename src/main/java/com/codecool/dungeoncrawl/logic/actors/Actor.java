@@ -3,15 +3,16 @@ package com.codecool.dungeoncrawl.logic.actors;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.Drawable;
+import com.codecool.dungeoncrawl.logic.items.Weapon;
 
 public abstract class Actor implements Drawable {
     protected String tileName;
     private Cell cell;
     protected int health = 10;
     protected boolean isEnemy;
-    protected int damage; // + weapon.getDamage();
-    // TODO: weapon = Weapon
-    // TODO:
+    protected int damage;
+    private Weapon weapon;
+
 
     public Actor(Cell cell) {
         this.cell = cell;
@@ -20,7 +21,7 @@ public abstract class Actor implements Drawable {
 
     public void attack(Actor enemy) {
 
-        enemy.setHealth(enemy.getHealth() - damage);
+        enemy.setHealth(enemy.getHealth() - getDamage());
         if (enemy.getHealth() <= 0) {
             enemy.getCell().setActor(null);
         } else {
@@ -68,6 +69,9 @@ public abstract class Actor implements Drawable {
     }
 
     public int getDamage() {
+        if (weapon != null) {
+            return damage + weapon.getDamage();
+        }
         return damage;
     }
 
@@ -106,5 +110,13 @@ public abstract class Actor implements Drawable {
 
     public void setTileName(String tileName) {
         this.tileName = tileName;
+    }
+
+    public Weapon getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(Weapon weapon) {
+        this.weapon = weapon;
     }
 }
