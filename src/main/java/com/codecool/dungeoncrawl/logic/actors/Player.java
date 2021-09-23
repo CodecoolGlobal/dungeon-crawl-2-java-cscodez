@@ -25,9 +25,6 @@ public class Player extends Actor {
 
     public void setItemToInventory (Item item) {
         inventory.merge(item.getName(), 1, Integer::sum);
-        for (String name: inventory.keySet()) {
-            String value = inventory.get(name).toString();
-        }
     }
 
     public String getTileName() {
