@@ -1,6 +1,7 @@
 package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Player;
@@ -22,7 +23,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap();
+    GameMap map = MapLoader.loadMap("/map.txt");
     GridPane ui = new GridPane();
     int visibleSize = 10;
     Canvas canvas = new Canvas(
@@ -119,6 +120,11 @@ public class Main extends Application {
             k++;
         }
         healthLabel.setText("" + map.getPlayer().getHealth());
+        if(checkIfDoorIsOpen()){
+            Player player = map.getPlayer();
+            renderNewMap(player);
+        }
+        System.out.println(map.getPlayer().getInventory().toString());
     }
 
     private void buttonHandler( GridPane ui, Cell cell) {
@@ -148,6 +154,25 @@ public class Main extends Application {
         ui.add(yesButton, 0, 1);
         ui.add(noButton, 1, 1);
 
+    }
+
+    private boolean checkIfDoorIsOpen() {
+        for (Cell[] cellRow : map.getCells()) {
+            for (Cell cell : cellRow) {
+                if(cell.getType().equals(CellType.OPENED_DOOR)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void renderNewMap(Player player){
+        map = MapLoader.loadMap("/map2.txt");
+        Cell playerCell = map.getPlayer().getCell();
+        player.setCell(playerCell);
+        map.setPlayer(player);
+        System.out.println(map.getPlayer().getInventory().toString());
     }
 }
 
