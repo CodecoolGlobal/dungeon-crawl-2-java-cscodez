@@ -17,6 +17,7 @@ public class BuildUI {
         int itemCol = 0;
         int buttonCol = 1;
         int row = 3;
+        HashMap<Label, Button> whatsOnUi= new HashMap<>();
         for (String item : hashMap.keySet()) {
             if (!item.equals("Lightsaber")) {
                 StringBuilder displayString = new StringBuilder();
@@ -29,10 +30,21 @@ public class BuildUI {
                 inventoryLabel.setText(displayString.toString());
                 ui.add(inventoryLabel, itemCol, row);
                 ui.add(useButton, buttonCol, row);
+                whatsOnUi.put(inventoryLabel, useButton);
 
                 row++;
             }
         }
+        Button exitButton = new Button("exit");
+        ui.add(exitButton, 0, row);
+        EventHandler<ActionEvent> exitHandler = e -> {
+            for (Label label:whatsOnUi.keySet()) {
+                ui.getChildren().remove(label);
+                ui.getChildren().remove(whatsOnUi.get(label));
+                ui.getChildren().remove(exitButton);
+            }
+        };
+        exitButton.setOnAction(exitHandler);
 
     }
 
