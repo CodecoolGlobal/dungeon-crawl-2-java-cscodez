@@ -11,6 +11,6 @@ public class Jawa extends Enemy {
 
     @Override
     public String getTileName() {
-        return "jawa";
+        return Enemies.JAWA.getTileName();
     }
 }

@@ -16,6 +16,7 @@ public enum TileNames {
     STORMTROOPER(Enemies.STORMTROOPER.getTileName(), 3,2),
     GREEN_BRUTE(Enemies.GREENBRUTE.getTileName(), 1,2),
     MANDALORIAN(Enemies.MANDALORIAN.getTileName(), 2,2),
+    FLYINGENEMY(Enemies.FLYINGENEMY.getTileName(), 4, 2),
 
     LIGHT_SABER("lightSaber", 0,3),
     BLUE_MILK("blueMilk", 2,3),

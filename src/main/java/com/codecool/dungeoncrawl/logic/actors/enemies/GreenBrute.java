@@ -11,6 +11,6 @@ public class GreenBrute extends Enemy {
 
     @Override
     public String getTileName() {
-        return "greenBrute";
+        return Enemies.GREENBRUTE.getTileName();
     }
 }

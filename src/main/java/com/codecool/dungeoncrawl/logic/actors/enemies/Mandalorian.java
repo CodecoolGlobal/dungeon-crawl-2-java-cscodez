@@ -15,6 +15,6 @@ public class Mandalorian extends Enemy {
 
     @Override
     public String getTileName() {
-        return "mandalorian";
+        return Enemies.MANDALORIAN.getTileName();
     }
 }

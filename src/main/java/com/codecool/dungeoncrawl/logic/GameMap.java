@@ -44,7 +44,7 @@ public class GameMap {
                     Enemy enemy = (Enemy)actor;
                     if (!enemy.getHasMoved()) {
                         Directions direction = Directions.getRandomDirection();
-                        enemy.move(direction.getX(), direction.getY());
+                        enemy.move(direction.getX(), direction.getY(), player);
                         enemy.swapHasMoved();
                     } else {
                         enemy.swapHasMoved();
