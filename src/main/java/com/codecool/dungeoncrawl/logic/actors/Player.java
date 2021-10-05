@@ -25,6 +25,8 @@ public class Player extends Actor {
         inventory.merge(item.getName(), 1, Integer::sum);
     }
 
+    public String getName() {return "";}
+
     public String getTileName() {
         if (getWeapon() != null && getWeapon().getTileName().equals("lightSaber")) {
             return tileName + "-" + getWeapon().getTileName();
