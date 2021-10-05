@@ -23,6 +23,7 @@ public class BuildUI {
 
     GameDatabaseManager manager = new GameDatabaseManager();
     HashMap<Label, Button> whatsOnUi;
+    ArrayList<Button> saveMenuButtons = new ArrayList<>();
     GridPane ui;
     Label inventoryLabel;
 
@@ -108,8 +109,6 @@ public class BuildUI {
         Button saveAndExitButton = new Button("Save & Exit");
         Button exitWithoutSaveButton = new Button("Exit");
 
-        ArrayList<Button> saveMenuButtons = new ArrayList<>();
-
         ui.add(saveAndExitButton, 0, 1);
         saveMenuButtons.add(saveAndExitButton);
         ui.add(exitWithoutSaveButton, 0, 2);
@@ -123,9 +122,7 @@ public class BuildUI {
 
         };
 
-        EventHandler<ActionEvent> exitButtonHandler = e -> {
-            System.exit(0);
-        };
+        EventHandler<ActionEvent> exitButtonHandler = e -> System.exit(0);
 
         EventHandler<ActionEvent> cancelHandler = e -> {
             for (Button button : saveMenuButtons) {
@@ -135,5 +132,12 @@ public class BuildUI {
         cancelButton.setOnAction(cancelHandler);
         saveAndExitButton.setOnAction(saveAndExitButtonHandler);
         exitWithoutSaveButton.setOnAction(exitButtonHandler);
+    }
+
+    public void removeSavingMenu() {
+        for (Button button : saveMenuButtons) {
+            ui.getChildren().remove(button);
+        }
+        saveMenuButtons = new ArrayList<>();
     }
 }

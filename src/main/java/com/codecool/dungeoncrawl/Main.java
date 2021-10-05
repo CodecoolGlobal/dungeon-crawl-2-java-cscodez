@@ -37,6 +37,7 @@ public class Main extends Application {
     Label healthLabel = new Label();
     GameDatabaseManager dbManager;
     boolean isInventoryActive = false;
+    boolean isSavingMenuActive = false;
 
 
     public static void main(String[] args) {
@@ -101,11 +102,17 @@ public class Main extends Application {
                         isInventoryActive = true;
                     } else {
                         uiBuilder.removeInventory();
-                        isInventoryActive = !isInventoryActive;
+                        isInventoryActive = false;
                     }
                     break;
                 case S:
-                    uiBuilder.savingMenu(ui, map);
+                    if (!isSavingMenuActive) {
+                        uiBuilder.savingMenu(ui, map);
+                        isSavingMenuActive = true;
+                    } else {
+                        uiBuilder.removeSavingMenu();
+                        isSavingMenuActive = false;
+                    }
 
 
             }
