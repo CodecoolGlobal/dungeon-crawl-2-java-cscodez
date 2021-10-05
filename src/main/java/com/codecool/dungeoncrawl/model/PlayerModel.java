@@ -7,6 +7,8 @@ public class PlayerModel extends BaseModel {
     private int hp;
     private int x;
     private int y;
+    private int damage;
+    private String tileName;
 
     public PlayerModel(String playerName, int x, int y) {
         this.playerName = playerName;
@@ -18,8 +20,9 @@ public class PlayerModel extends BaseModel {
         this.playerName = player.getName();
         this.x = player.getX();
         this.y = player.getY();
-
         this.hp = player.getHealth();
+        this.damage = player.getDamage();
+        this.tileName = player.getTileName();
 
     }
 
@@ -53,5 +56,13 @@ public class PlayerModel extends BaseModel {
 
     public void setY(int y) {
         this.y = y;
+    }
+
+    public int getDamage() {
+        return damage;
+    }
+
+    public String getTileName() {
+        return tileName;
     }
 }
