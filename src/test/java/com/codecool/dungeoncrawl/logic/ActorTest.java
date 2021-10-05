@@ -66,5 +66,22 @@ class ActorTest {
         assertEquals(40, jawasNewHealth);
     }
 
+    @Test
+    void getDamage_withWeapon() {
+        Player player = new Player(gameMap.getCell(0, 0));
+        player.setWeapon(new LightSaber(gameMap.getCell(0, 1), "lightSaber" ));
 
+        int damage = player.getDamage();
+
+        assertEquals(50, damage);
+    }
+
+    @Test
+    void getDamage_withoutWeapon() {
+        Player player = new Player(gameMap.getCell(0, 0));
+
+        int damage = player.getDamage();
+
+        assertEquals(10, damage);
+    }
 }
