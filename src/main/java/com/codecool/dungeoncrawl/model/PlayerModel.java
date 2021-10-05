@@ -65,4 +65,8 @@ public class PlayerModel extends BaseModel {
     public String getTileName() {
         return tileName;
     }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
 }
