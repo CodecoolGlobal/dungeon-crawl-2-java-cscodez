@@ -36,6 +36,8 @@ public class Main extends Application {
     GraphicsContext context = canvas.getGraphicsContext2D();
     Label healthLabel = new Label();
     GameDatabaseManager dbManager;
+    boolean isInventoryActive = false;
+    boolean isSavingMenuActive = false;
 
 
     public static void main(String[] args) {
@@ -95,7 +97,23 @@ public class Main extends Application {
                     map.getPlayer().move(1, 0);
                     break;
                 case I:
-                    uiBuilder.inventoryDisplayer(ui, map, healthLabel);
+                    if (!isInventoryActive) {
+                        uiBuilder.inventoryDisplayer(ui, map, healthLabel);
+                        isInventoryActive = true;
+                    } else {
+                        uiBuilder.removeInventory();
+                        isInventoryActive = false;
+                    }
+                    break;
+                case S:
+                    if (!isSavingMenuActive) {
+                        uiBuilder.savingMenu(ui, map);
+                        isSavingMenuActive = true;
+                    } else {
+                        uiBuilder.removeSavingMenu();
+                        isSavingMenuActive = false;
+                    }
+
 
             }
         }
