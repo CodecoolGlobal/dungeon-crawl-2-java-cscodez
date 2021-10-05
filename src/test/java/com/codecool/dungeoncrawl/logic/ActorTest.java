@@ -4,26 +4,33 @@ import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.actors.enemies.Jawa;
 import com.codecool.dungeoncrawl.logic.actors.enemies.Stormtrooper;
 import com.codecool.dungeoncrawl.logic.items.LightSaber;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActorTest {
-    GameMap gameMap = new GameMap(3, 3, CellType.FLOOR);
+
+    GameMap gameMap;
+
+    @BeforeEach
+    void initGameMap() {
+        gameMap = new GameMap(3, 3, CellType.FLOOR);
+    }
 
     @Test
-    void moveUpdatesCells() {
+    void move_UpdatesCells() {
         Player player = new Player(gameMap.getCell(1, 1));
         player.move(1, 0);
 
         assertEquals(2, player.getX());
         assertEquals(1, player.getY());
-        assertEquals(null, gameMap.getCell(1, 1).getActor());
+        assertNull(gameMap.getCell(1, 1).getActor());
         assertEquals(player, gameMap.getCell(2, 1).getActor());
     }
 
     @Test
-    void cannotMoveIntoWall() {
+    void move_cannotMoveIntoWall() {
         gameMap.getCell(2, 1).setType(CellType.WALL);
         Player player = new Player(gameMap.getCell(1, 1));
         player.move(1, 0);
@@ -33,7 +40,7 @@ class ActorTest {
     }
 
     @Test
-    void cannotMoveOutOfMap() {
+    void move_cannotMoveOutOfMap() {
         Player player = new Player(gameMap.getCell(2, 1));
         player.move(1, 0);
 
@@ -42,7 +49,7 @@ class ActorTest {
     }
 
     @Test
-    void cannotMoveIntoAnotherActor() {
+    void move_cannotMoveIntoAnotherActor() {
         Player player = new Player(gameMap.getCell(1, 1));
         Stormtrooper stormtrooper = new Stormtrooper(gameMap.getCell(2, 1));
         player.move(1, 0);
@@ -78,7 +85,7 @@ class ActorTest {
 
     @Test
     void getDamage_withoutWeapon() {
-        Player player = new Player(gameMap.getCell(0, 0));
+        Player player = new Player(gameMap.getCell(1, 0));
 
         int damage = player.getDamage();
 
