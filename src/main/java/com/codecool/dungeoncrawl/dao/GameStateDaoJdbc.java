@@ -60,18 +60,18 @@ public class GameStateDaoJdbc implements GameStateDao {
                 return null;
             }
 
-            int gameStateId = resultSet.getInt(1);
-            String currentMap = resultSet.getString(2);
-            Timestamp savedAt = resultSet.getTimestamp(3);
-            int playerId = resultSet.getInt(4);
-            String nameOfSave = resultSet.getString(5);
+            int gameStateId = resultSet.getInt(GameStateColumns.ID.getName());
+            String currentMap = resultSet.getString(GameStateColumns.CURRENT_MAP.getName());
+            Timestamp savedAt = resultSet.getTimestamp(GameStateColumns.SAVED_AT.getName());
+            int playerId = resultSet.getInt(GameStateColumns.PLAYER_ID.getName());
+            String nameOfSave = resultSet.getString(GameStateColumns.NAME_OF_SAVE.getName());
 
-            String playerName = resultSet.getString(6);
-            int playerHp = resultSet.getInt(7);
-            int x = resultSet.getInt(8);
-            int y = resultSet.getInt(9);
-            int damage = resultSet.getInt(10);
-            String tileName = resultSet.getString(11);
+            String playerName = resultSet.getString(PlayerColumns.PLAYER_NAME.getName());
+            int playerHp = resultSet.getInt(PlayerColumns.HP.name());
+            int x = resultSet.getInt(PlayerColumns.X.name());
+            int y = resultSet.getInt(PlayerColumns.Y.name());
+            int damage = resultSet.getInt(PlayerColumns.DAMAGE.name());
+            String tileName = resultSet.getString(PlayerColumns.TILE_NAME.name());
 
             PlayerModel playerModel = new PlayerModel(playerName, x, y);
             playerModel.setDamage(damage);
