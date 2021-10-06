@@ -27,7 +27,7 @@ public class PlayerDaoJdbc implements PlayerDao {
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
-            player.setId(resultSet.getInt(1));
+            player.setId(resultSet.getInt(PlayerColumns.ID.getName()));
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -35,7 +35,7 @@ public class PlayerDaoJdbc implements PlayerDao {
 
     @Override
     public void update(PlayerModel player) {
-        try (Connection conn = dataSource.getConnection()){
+        try (Connection conn = dataSource.getConnection()) {
             String sql = "UPDATE player SET player_name = ?, hp = ?, x = ?, y = ?, damage = ? WHERE id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, player.getPlayerName());
@@ -44,7 +44,7 @@ public class PlayerDaoJdbc implements PlayerDao {
             statement.setInt(4, player.getY());
             statement.setInt(5, player.getDamage());
             statement.executeUpdate();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
 
@@ -63,12 +63,12 @@ public class PlayerDaoJdbc implements PlayerDao {
                 return null;
             }
 
-            int playerId = rs.getInt(1);
-            String playerName = rs.getString(2);
-            int hp = rs.getInt(3);
-            int x = rs.getInt(4);
-            int y = rs.getInt(5);
-            int damage = rs.getInt(6);
+            int playerId = rs.getInt(PlayerColumns.ID.getName());
+            String playerName = rs.getString(PlayerColumns.PLAYER_NAME.getName());
+            int hp = rs.getInt(PlayerColumns.HP.getName());
+            int x = rs.getInt(PlayerColumns.X.getName());
+            int y = rs.getInt(PlayerColumns.Y.getName());
+            int damage = rs.getInt(PlayerColumns.DAMAGE.getName());
 
             PlayerModel playerModel = new PlayerModel(playerName, x, y);
             playerModel.setHp(hp);

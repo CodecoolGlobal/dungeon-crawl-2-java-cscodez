@@ -69,4 +69,8 @@ public class PlayerModel extends BaseModel {
     public void setDamage(int damage) {
         this.damage = damage;
     }
+
+    public void setTileName(String tileName) {
+        this.tileName = tileName;
+    }
 }
