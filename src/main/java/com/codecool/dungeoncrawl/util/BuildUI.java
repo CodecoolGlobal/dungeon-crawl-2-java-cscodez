@@ -15,6 +15,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -104,7 +105,7 @@ public class BuildUI {
 
     }
 
-    public void savingMenu(GridPane ui, GameMap map) {
+    public void savingMenu(GameMap map, GridPane ui) {
         Button cancelButton = new Button("Cancel");
         Button saveAndExitButton = new Button("Save & Exit");
         Button exitWithoutSaveButton = new Button("Exit");
@@ -117,7 +118,12 @@ public class BuildUI {
         saveMenuButtons.add(cancelButton);
 
         EventHandler<ActionEvent> saveAndExitButtonHandler = e -> {
-            //manager.savePlayer(map.getPlayer());
+            try {
+                manager.setup();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            manager.savePlayer(map.getPlayer());
             System.exit(0);
 
         };
@@ -134,7 +140,7 @@ public class BuildUI {
         exitWithoutSaveButton.setOnAction(exitButtonHandler);
     }
 
-    public void removeSavingMenu() {
+    public void removeSavingMenu(GridPane ui) {
         for (Button button : saveMenuButtons) {
             ui.getChildren().remove(button);
         }

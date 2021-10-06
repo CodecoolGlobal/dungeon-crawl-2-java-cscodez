@@ -107,10 +107,10 @@ public class Main extends Application {
                     break;
                 case S:
                     if (!isSavingMenuActive) {
-                        uiBuilder.savingMenu(ui, map);
+                        uiBuilder.savingMenu(map, ui);
                         isSavingMenuActive = true;
                     } else {
-                        uiBuilder.removeSavingMenu();
+                        uiBuilder.removeSavingMenu(ui);
                         isSavingMenuActive = false;
                     }
 
