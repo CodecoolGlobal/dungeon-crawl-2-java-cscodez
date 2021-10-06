@@ -63,9 +63,9 @@ public class PlayerDaoJdbc implements PlayerDao {
                 return null;
             }
 
-            int playerId = rs.getInt(1);
-            String playerName = rs.getString(2);
-            int hp = rs.getInt(3);
+            int playerId = rs.getInt("id");
+            String playerName = rs.getString("player_name");
+            int hp = rs.getInt("hp");
             int x = rs.getInt(4);
             int y = rs.getInt(5);
             int damage = rs.getInt(6);
