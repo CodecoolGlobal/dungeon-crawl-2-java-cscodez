@@ -43,9 +43,10 @@ public class GameDatabaseManager {
         return dataSource;
     }
 
-    public GameState makeGameState(PlayerModel playerModel, String saveAs) {
+    public GameState makeGameState(PlayerModel playerModel, String saveAs, String gameMap) {
         Timestamp date = new Timestamp(System.currentTimeMillis());
-        GameState gameState = new GameState("map", new Date(date.getTime()), playerModel);
+
+        GameState gameState = new GameState(gameMap, new Date(date.getTime()), playerModel);
         gameState.setNameOfSave(saveAs);
         return gameState;
     }

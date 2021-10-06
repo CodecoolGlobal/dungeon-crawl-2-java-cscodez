@@ -5,12 +5,10 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.items.BlueMilk;
-import com.codecool.dungeoncrawl.logic.items.Item;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
 import com.codecool.dungeoncrawl.model.PlayerModel;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -19,7 +17,6 @@ import javafx.scene.layout.GridPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 
 public class BuildUI {
 
@@ -164,13 +161,13 @@ public class BuildUI {
         saveMenuButtons.add(saveButton);
 
         EventHandler<ActionEvent> saveButtonHandler = e -> {
-            /*Label saved = new Label();
-            saved.setText("Saved");*/
             ui.getChildren().remove(saveNameInput);
             ui.getChildren().remove(saveButton);
             ui.add(saved, 0, 1);
             PlayerModel playerModel = manager.savePlayer(map.getPlayer());
-            manager.saveGameState(manager.makeGameState(playerModel, saveNameInput.getText()));
+            String gameMap = MakeGson.convertObjectToJson(map);
+            System.out.println(gameMap);
+            manager.saveGameState(manager.makeGameState(playerModel, saveNameInput.getText(), gameMap));
 
         };
 
