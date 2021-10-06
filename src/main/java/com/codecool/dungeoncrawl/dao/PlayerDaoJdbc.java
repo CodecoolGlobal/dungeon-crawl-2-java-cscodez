@@ -63,12 +63,12 @@ public class PlayerDaoJdbc implements PlayerDao {
                 return null;
             }
 
-            int playerId = rs.getInt(PlayerColumnNames.ID.getPlayerColumnName());
-            String playerName = rs.getString(PlayerColumnNames.PLAYER_NAME.getPlayerColumnName());
-            int hp = rs.getInt(PlayerColumnNames.HP.getPlayerColumnName());
-            int x = rs.getInt(PlayerColumnNames.X.getPlayerColumnName());
-            int y = rs.getInt(PlayerColumnNames.Y.getPlayerColumnName());
-            int damage = rs.getInt(PlayerColumnNames.DAMAGE.getPlayerColumnName());
+            int playerId = rs.getInt(PlayerColumns.ID.getName());
+            String playerName = rs.getString(PlayerColumns.PLAYER_NAME.getName());
+            int hp = rs.getInt(PlayerColumns.HP.getName());
+            int x = rs.getInt(PlayerColumns.X.getName());
+            int y = rs.getInt(PlayerColumns.Y.getName());
+            int damage = rs.getInt(PlayerColumns.DAMAGE.getName());
 
             PlayerModel playerModel = new PlayerModel(playerName, x, y);
             playerModel.setHp(hp);
