@@ -35,6 +35,15 @@ public class GameStateDaoJdbc implements GameStateDao {
 
     @Override
     public void update(GameState state) {
+        try(Connection conn = dataSource.getConnection()){
+            String sql = "UPDATE game_state SET current_map = ?, saved_at = ? WHERE id = ?";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1, state.getCurrentMap());
+            statement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            statement.executeUpdate();
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
 
     }
 
