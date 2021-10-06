@@ -13,6 +13,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 
 import java.sql.SQLException;
@@ -105,17 +106,20 @@ public class BuildUI {
 
     }
 
-    public void savingMenu(GameMap map, GridPane ui) {
-        Button cancelButton = new Button("Cancel");
-        Button saveAndExitButton = new Button("Save & Exit");
+    public void savingMenu(GameMap map, GridPane ui ) {
+        Label saved = new Label();
+        saved.setText("Saved");
+
+        Button backButton = new Button("Back");
+        Button saveAndExitButton = new Button("Save");
         Button exitWithoutSaveButton = new Button("Exit");
 
         ui.add(saveAndExitButton, 0, 1);
         saveMenuButtons.add(saveAndExitButton);
         ui.add(exitWithoutSaveButton, 0, 2);
         saveMenuButtons.add(exitWithoutSaveButton);
-        ui.add(cancelButton, 0, 4);
-        saveMenuButtons.add(cancelButton);
+        ui.add(backButton, 0, 4);
+        saveMenuButtons.add(backButton);
 
         EventHandler<ActionEvent> saveAndExitButtonHandler = e -> {
             try {
@@ -123,19 +127,21 @@ public class BuildUI {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            manager.savePlayer(map.getPlayer());
-            System.exit(0);
+            textInputPopUp(ui, map, saveAndExitButton, saved);
+            /*manager.savePlayer(map.getPlayer());
+            System.exit(0);*/
 
         };
 
         EventHandler<ActionEvent> exitButtonHandler = e -> System.exit(0);
 
-        EventHandler<ActionEvent> cancelHandler = e -> {
+        EventHandler<ActionEvent> backHandler = e -> {
             for (Button button : saveMenuButtons) {
                 ui.getChildren().remove(button);
+                ui.getChildren().remove(saved);
             }
         };
-        cancelButton.setOnAction(cancelHandler);
+        backButton.setOnAction(backHandler);
         saveAndExitButton.setOnAction(saveAndExitButtonHandler);
         exitWithoutSaveButton.setOnAction(exitButtonHandler);
     }
@@ -146,4 +152,29 @@ public class BuildUI {
         }
         saveMenuButtons = new ArrayList<>();
     }
+
+    public void textInputPopUp(GridPane ui, GameMap map, Button saveAndExitButton, Label saved) {
+        TextField saveNameInput = new TextField();
+        Button saveButton = new Button("Save");
+
+        ui.getChildren().remove(saveAndExitButton);
+
+        ui.add(saveNameInput,0, 1 );
+        ui.add(saveButton, 1, 1);
+        saveMenuButtons.add(saveButton);
+
+        EventHandler<ActionEvent> saveButtonHandler = e -> {
+            /*Label saved = new Label();
+            saved.setText("Saved");*/
+            ui.getChildren().remove(saveNameInput);
+            ui.getChildren().remove(saveButton);
+            ui.add(saved, 0, 1);
+            manager.savePlayer(map.getPlayer());
+
+        };
+
+        saveButton.setOnAction(saveButtonHandler);
+    }
+
+
 }
