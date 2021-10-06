@@ -8,15 +8,19 @@ import com.codecool.dungeoncrawl.logic.items.Weapon;
 
 public abstract class Actor implements Drawable {
     protected String tileName;
-    private Cell cell;
+    private transient Cell cell;
     protected int health = 10;
     protected int damage;
     private Weapon weapon;
+    private int x;
+    private int y;
 
 
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
+        this.x=cell.getX();
+        this.y=cell.getY();
     }
 
     public void attack(Actor enemy) {
@@ -101,12 +105,25 @@ public abstract class Actor implements Drawable {
         this.tileName = tileName;
     }
 
-    public void setCell(Cell cell){this.cell = cell;}
+    public void setCell(Cell cell){
+        this.cell = cell;
+        this.x = cell.getX();
+        this.y = cell.getY();
+    }
+
     public Weapon getWeapon() {
         return weapon;
     }
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
+    }
+
+    public int getXCoordinate() {
+        return x;
+    }
+
+    public int getYCoordinate() {
+        return y;
     }
 }

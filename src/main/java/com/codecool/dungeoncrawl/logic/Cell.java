@@ -7,7 +7,7 @@ public class Cell implements Drawable {
     private CellType type;
     private Actor actor;
     private Door door;
-    private GameMap gameMap;
+    private transient GameMap gameMap;
     private int x, y;
     private Item item;
 
@@ -28,6 +28,10 @@ public class Cell implements Drawable {
 
     public GameMap getGameMap() {
         return gameMap;
+    }
+
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
     }
 
     public Door getDoor() {
