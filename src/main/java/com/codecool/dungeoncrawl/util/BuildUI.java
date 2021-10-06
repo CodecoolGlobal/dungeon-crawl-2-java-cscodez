@@ -31,7 +31,6 @@ public class BuildUI {
         int buttonCol = 1;
         int row = 3;
         this.ui = ui;
-        //Label inventoryLabel = new Label();
         Player player = map.getPlayer();
         HashMap<String, Integer> hashMap= player.getInventory();
         this.whatsOnUi= new HashMap<>();
@@ -125,9 +124,6 @@ public class BuildUI {
                 ex.printStackTrace();
             }
             textInputPopUp(ui, map, saveAndExitButton, saved);
-            /*manager.savePlayer(map.getPlayer());
-            System.exit(0);*/
-
         };
 
         EventHandler<ActionEvent> exitButtonHandler = e -> System.exit(0);
