@@ -169,7 +169,8 @@ public class BuildUI {
             ui.getChildren().remove(saveNameInput);
             ui.getChildren().remove(saveButton);
             ui.add(saved, 0, 1);
-            manager.savePlayer(map.getPlayer());
+            PlayerModel playerModel = manager.savePlayer(map.getPlayer());
+            manager.saveGameState(manager.makeGameState(playerModel, saveNameInput.getText()));
 
         };
 
