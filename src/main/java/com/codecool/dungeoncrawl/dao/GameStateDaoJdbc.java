@@ -18,11 +18,12 @@ public class GameStateDaoJdbc implements GameStateDao {
     @Override
     public void add(GameState state) {
         try (Connection conn = dataSource.getConnection()) {
-            String sql = "INSERT INTO game_state (id, current_map, saved_at, player_id) VALUES (?, ?, ?, ?)";
+            String sql = "INSERT INTO game_state (id, current_map, saved_at, player_id, name_of_save) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement statement = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             statement.setString(1, state.getCurrentMap());
             statement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
             statement.setInt(3, state.getPlayer().getId());
+            statement.setString(4, state.getNameOfSave());
             statement.executeUpdate();
             ResultSet resultSet = statement.getGeneratedKeys();
             resultSet.next();
@@ -36,10 +37,11 @@ public class GameStateDaoJdbc implements GameStateDao {
     @Override
     public void update(GameState state) {
         try(Connection conn = dataSource.getConnection()){
-            String sql = "UPDATE game_state SET current_map = ?, saved_at = ? WHERE id = ?";
+            String sql = "UPDATE game_state SET current_map = ?, saved_at = ?, name_of_save = ? WHERE id = ?";
             PreparedStatement statement = conn.prepareStatement(sql);
             statement.setString(1, state.getCurrentMap());
             statement.setTimestamp(2, new Timestamp(System.currentTimeMillis()));
+            statement.setString(3, state.getNameOfSave());
             statement.executeUpdate();
         }catch (SQLException e){
             throw new RuntimeException(e);
@@ -62,13 +64,14 @@ public class GameStateDaoJdbc implements GameStateDao {
             String currentMap = resultSet.getString(2);
             Timestamp savedAt = resultSet.getTimestamp(3);
             int playerId = resultSet.getInt(4);
+            String nameOfSave = resultSet.getString(5);
 
-            String playerName = resultSet.getString(5);
-            int playerHp = resultSet.getInt(6);
-            int x = resultSet.getInt(7);
-            int y = resultSet.getInt(8);
-            int damage = resultSet.getInt(9);
-            String tileName = resultSet.getString(10);
+            String playerName = resultSet.getString(6);
+            int playerHp = resultSet.getInt(7);
+            int x = resultSet.getInt(8);
+            int y = resultSet.getInt(9);
+            int damage = resultSet.getInt(10);
+            String tileName = resultSet.getString(11);
 
             PlayerModel playerModel = new PlayerModel(playerName, x, y);
             playerModel.setDamage(damage);
@@ -78,6 +81,7 @@ public class GameStateDaoJdbc implements GameStateDao {
 
             GameState gameState = new GameState(currentMap, new Date(savedAt.getTime()), playerModel);
             gameState.setId(gameStateId);
+            gameState.setNameOfSave(nameOfSave);
 
             return gameState;
         } catch (SQLException e){
