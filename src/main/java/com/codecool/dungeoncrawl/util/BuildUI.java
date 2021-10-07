@@ -11,7 +11,6 @@ import com.codecool.dungeoncrawl.logic.items.BlueMilk;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
 import com.codecool.dungeoncrawl.logic.tiles.Tiles;
 import com.codecool.dungeoncrawl.model.PlayerModel;
-
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -24,9 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
-
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -90,9 +87,7 @@ public class BuildUI {
         whatsOnUi.put(inventoryLabel, useButton);
         row++;
         if (item.equals(BlueMilk.getClassName())) {
-            EventHandler<ActionEvent> useButtonEvent = e -> {
-                useBlueMilk(ui, healthLabel, player, hashMap, item, useButton);
-            };
+            EventHandler<ActionEvent> useButtonEvent = e -> useBlueMilk(ui, healthLabel, player, hashMap, item, useButton);
             useButton.setOnAction(useButtonEvent);
         }
         return row;
@@ -139,25 +134,31 @@ public class BuildUI {
         Button yesButton = new Button("Pick up\n" + cell.getItem().getName());
         Button noButton = new Button("Don't pickup\n" + cell.getItem().getName());
         EventHandler<ActionEvent> yesEvent = e -> {
-            map.getPlayer().setItemToInventory(cell.getItem().getName(), "increase");
-
-            if (cell.getItem() instanceof Weapon) {
-                map.getPlayer().setWeapon((Weapon) cell.getItem());
-            }
-            cell.setItem(null);
-            ui.getChildren().remove(yesButton);
-            ui.getChildren().remove(noButton);
-        };
-        EventHandler<ActionEvent> noEvent = e -> {
-            ui.getChildren().remove(yesButton);
-            ui.getChildren().remove(noButton);
+            pickUpItem(cell, map);
+            eraseButtons(ui, yesButton, noButton);
+            eraseButtons(ui, yesButton, noButton);
         };
 
-        yesButton.setOnAction(yesEvent);
-        noButton.setOnAction(noEvent);
+        EventHandler<ActionEvent> noEvent = e -> eraseButtons(ui, yesButton, noButton);
         ui.add(yesButton, 0, 1);
         ui.add(noButton, 1, 1);
 
+        yesButton.setOnAction(yesEvent);
+        noButton.setOnAction(noEvent);
+    }
+
+    private void eraseButtons(GridPane ui, Button yesButton, Button noButton) {
+        ui.getChildren().remove(yesButton);
+        ui.getChildren().remove(noButton);
+    }
+
+    private void pickUpItem(Cell cell, GameMap map) {
+        map.getPlayer().setItemToInventory(cell.getItem().getName(), "increase");
+
+        if (cell.getItem() instanceof Weapon) {
+            map.getPlayer().setWeapon((Weapon) cell.getItem());
+        }
+        cell.setItem(null);
     }
 
     public void savingMenu(GameMap map, GridPane ui ) {
@@ -168,11 +169,9 @@ public class BuildUI {
         Button saveButton = new Button("Save");
         Button exitButton = new Button("Exit  ");
 
-        ui.add(saveButton, 0, 1);
+        addButtonsForSave(ui, backButton, saveButton, exitButton);
         saveMenuButtons.add(saveButton);
-        ui.add(exitButton, 0, 2);
         saveMenuButtons.add(exitButton);
-        ui.add(backButton, 0, 4);
         saveMenuButtons.add(backButton);
 
         EventHandler<ActionEvent> saveButtonHandler = e -> {
@@ -197,6 +196,12 @@ public class BuildUI {
         exitButton.setOnAction(exitButtonHandler);
     }
 
+    private void addButtonsForSave(GridPane ui, Button backButton, Button saveButton, Button exitButton) {
+        ui.add(saveButton, 0, 1);
+        ui.add(exitButton, 0, 2);
+        ui.add(backButton, 0, 4);
+    }
+
     private void exit() {
         System.exit(0);
     }
@@ -219,16 +224,24 @@ public class BuildUI {
         saveMenuButtons.add(saveButton);
 
         EventHandler<ActionEvent> saveButtonHandler = e -> {
-            ui.getChildren().remove(saveNameInput);
-            ui.getChildren().remove(saveButton);
-            ui.add(saved, 0, 1);
-            PlayerModel playerModel = manager.savePlayer(map.getPlayer());
-            String gameMap = Serialization.serialize(map);
-            manager.saveGameState(manager.makeGameState(playerModel, saveNameInput.getText(), gameMap));
+            removeSaveButton(ui, saved, saveNameInput, saveButton);
+            saveGame(map, saveNameInput);
 
         };
 
         saveButton.setOnAction(saveButtonHandler);
+    }
+
+    private void saveGame(GameMap map, TextField saveNameInput) {
+        PlayerModel playerModel = manager.savePlayer(map.getPlayer());
+        String gameMap = Serialization.serialize(map);
+        manager.saveGameState(manager.makeGameState(playerModel, saveNameInput.getText(), gameMap));
+    }
+
+    private void removeSaveButton(GridPane ui, Label saved, TextField saveNameInput, Button saveButton) {
+        ui.getChildren().remove(saveNameInput);
+        ui.getChildren().remove(saveButton);
+        ui.add(saved, 0, 1);
     }
 
     public void loadMenu(GridPane ui, GameMap map) {
