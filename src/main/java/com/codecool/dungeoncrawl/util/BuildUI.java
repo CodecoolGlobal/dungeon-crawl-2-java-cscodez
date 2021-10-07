@@ -1,30 +1,62 @@
 package com.codecool.dungeoncrawl.util;
 
+import com.codecool.dungeoncrawl.Main;
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.Cell;
+import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.items.BlueMilk;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
+import com.codecool.dungeoncrawl.logic.tiles.Tiles;
 import com.codecool.dungeoncrawl.model.PlayerModel;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 public class BuildUI {
 
-    GameDatabaseManager manager = new GameDatabaseManager();
-    HashMap<Label, Button> whatsOnUi;
-    ArrayList<Button> saveMenuButtons = new ArrayList<>();
-    GridPane ui;
-    Label inventoryLabel;
+    private final GameDatabaseManager manager = new GameDatabaseManager();
+    private HashMap<Label, Button> whatsOnUi;
+    private ArrayList<Button> saveMenuButtons = new ArrayList<>();
+    private GridPane ui;
+    private Label inventoryLabel;
+    private final int visibleSize = 20;
+    private final Canvas canvas = new Canvas(
+            visibleSize * Tiles.TILE_WIDTH,
+            visibleSize * Tiles.TILE_WIDTH);
+    private final GraphicsContext context = canvas.getGraphicsContext2D();
+    private final Label healthLabel = new Label();
+
+
+
+    public BuildUI(GridPane ui) {
+        this.ui = ui;
+        ui.add(new Label("Health: "), 0, 0);
+        ui.add(healthLabel, 1, 0);
+        healthLabel.setTextFill(Color.RED);
+    }
+
+    public Canvas getCanvas() {
+        return canvas;
+    }
+
+
+    public Label getHealthLabel() {
+        return healthLabel;
+    }
 
     public void inventoryDisplayer(GridPane ui, GameMap map, Label healthLabel) {
         int itemCol = 0;
@@ -171,7 +203,7 @@ public class BuildUI {
     }
 
     public void loadMenu(GridPane ui, GameMap map) {
-        Button startButton = new Button("Start");
+        Button startButton = new Button("Start new game");
         Button loadButton = new Button("Load");
         Button exitButton = new Button("Exit");
 
@@ -188,7 +220,7 @@ public class BuildUI {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            loadInputPopUp(ui, loadButton, startButton, exitButton);
+            loadInputPopUp(ui, loadButton, startButton, exitButton, map);
         };
         loadButton.setOnAction(loadButtonHandler);
 
@@ -196,29 +228,102 @@ public class BuildUI {
 
     }
 
-    public void loadInputPopUp(GridPane ui, Button loadButton, Button startButton, Button exitButton) {
-        TextField loadNameInput = new TextField();
-        Button loadGameButton  = new Button("Load game");
+    public void loadInputPopUp(GridPane ui, Button loadButton, Button startButton, Button exitButton, GameMap map) {
+        Label l = new Label("Choose a saved game: ");
+        Button loadChosenGame = new Button("Load");
+
+        HashMap<Integer, String> allIdsAndNames = manager.getAllIdAndName();
+
+        ChoiceBox<String> choices = new ChoiceBox<>(FXCollections.observableArrayList(allIdsAndNames.values()));
+
+        //getChoice(choices);
 
         ui.getChildren().remove(startButton);
-        ui.add(loadNameInput, 0, 1);
-        ui.add(loadGameButton, 1, 1);
-        //ui.add(loadButton,0, 1 );
+        ui.add(choices, 0, 1);
+        ui.add(loadChosenGame, 1, 1);
 
-        EventHandler<ActionEvent> loadGameButtonHandler = e -> {
+        EventHandler<ActionEvent> loadSavedGameHandler = e -> {
+            String choseSavedGameName = choices.getSelectionModel().getSelectedItem();
+            System.out.println(choseSavedGameName);
+            for (var item : allIdsAndNames.entrySet()) {
+                if(item.getValue().equals(choseSavedGameName)) {
+                    Main.map = manager.getSavedGameState(item.getKey());
+                    buildConnectionsAfterLoad(Main.map);
+                    refresh();
+                }
+            }
 
-            //loadGameInput has the name of loadable game!
-
-            ui.getChildren().remove(loadNameInput);
-            ui.getChildren().remove(loadGameButton);
+            ui.getChildren().remove(choices);
+            ui.getChildren().remove(loadChosenGame);
             ui.getChildren().remove(loadButton);
             ui.getChildren().remove(exitButton);
+
         };
-
-        loadGameButton.setOnAction(loadGameButtonHandler);
-
+        loadChosenGame.setOnAction(loadSavedGameHandler);
 
     }
 
+    private void buildConnectionsAfterLoad(GameMap gameMap) {
+        for (Cell[] cell : gameMap.getCells()) {
+            for (Cell cell1 : cell) {
+                cell1.setGameMap(gameMap);
+                if (cell1.getActor() != null) cell1.getActor().setCell(cell1);
+                if (cell1.getActor() != null && cell1.getActor() instanceof Player) gameMap.setPlayer((Player) cell1.getActor());
+                if (cell1.getItem() != null) cell1.getItem().setCell(cell1);
+                if (cell1.getDoor() != null) cell1.getDoor().setCell(cell1);
+            }
+        }
+    }
 
+    public void refresh() {
+        context.setFill(Color.BLACK);
+        context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
+        int[] startCoordinate = Main.map.getPlayerCoordinate(visibleSize);
+
+        int j = 0;
+        int k = 0;
+
+        for (int x = startCoordinate[0]; x < visibleSize + startCoordinate[0]; x++) {
+            for (int y = startCoordinate[1]; y < startCoordinate[1] + visibleSize; y++) {
+                Cell cell = Main.map.getCell(x, y);
+                if (cell.getActor() != null) {
+                    if (cell.getItem() != null && cell.getActor() instanceof Player) {
+                        pickUpButtonHandler(this.ui, cell, Main.map);
+                    }
+                    Tiles.drawTile(context, cell.getActor(), k, j);
+
+                } else if (cell.getItem() != null) {
+                    Tiles.drawTile(context, cell.getItem(), k, j);
+                } else {
+                    Tiles.drawTile(context, cell, k, j);
+                }
+                j++;
+            }
+            j = 0;
+            k++;
+        }
+        healthLabel.setText("" + Main.map.getPlayer().getHealth());
+        if (checkIfDoorIsOpen()) {
+            Player player = Main.map.getPlayer();
+            renderNewMap(player);
+        }
+    }
+
+    private boolean checkIfDoorIsOpen() {
+        for (Cell[] cellRow : Main.map.getCells()) {
+            for (Cell cell : cellRow) {
+                if (cell.getType().equals(CellType.OPENED_DOOR)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private void renderNewMap(Player player) {
+        Main.map = MapLoader.loadMap("/map2.txt");
+        Cell playerCell = Main.map.getPlayer().getCell();
+        player.setCell(playerCell);
+        Main.map.setPlayer(player);
+    }
 }

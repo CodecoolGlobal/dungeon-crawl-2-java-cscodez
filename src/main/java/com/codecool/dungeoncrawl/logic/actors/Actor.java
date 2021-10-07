@@ -13,6 +13,8 @@ public abstract class Actor implements Drawable {
     protected int damage;
     private Weapon weapon;
 
+    public Actor() {}
+
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);

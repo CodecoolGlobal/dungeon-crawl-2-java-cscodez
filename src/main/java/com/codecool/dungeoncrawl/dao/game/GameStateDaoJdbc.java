@@ -6,6 +6,8 @@ import com.codecool.dungeoncrawl.model.PlayerModel;
 
 import javax.sql.DataSource;
 import java.sql.*;
+import java.sql.Date;
+import java.util.*;
 import java.util.HashMap;
 
 public class GameStateDaoJdbc implements GameStateDao {
@@ -90,15 +92,31 @@ public class GameStateDaoJdbc implements GameStateDao {
 
             HashMap<Integer, String> gameSaves = new HashMap<>();
 
-            while (resultSet.next()){
+            do{
                 int gameStateId = resultSet.getInt(GameStateColumns.ID.getName());
                 String nameOfSave = resultSet.getString(GameStateColumns.NAME_OF_SAVE.getName());
                 gameSaves.put(gameStateId, nameOfSave);
-            }
+            }while (resultSet.next());
 
             return gameSaves;
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
+    }
+
+    private PlayerModel buildPlayerModel(ResultSet resultSet) throws SQLException {
+        String playerName = resultSet.getString(PlayerColumns.PLAYER_NAME.getName());
+        int playerHp = resultSet.getInt(PlayerColumns.HP.name());
+        int x = resultSet.getInt(PlayerColumns.X.name());
+        int y = resultSet.getInt(PlayerColumns.Y.name());
+        int damage = resultSet.getInt(PlayerColumns.DAMAGE.name());
+        String tileName = resultSet.getString(PlayerColumns.TILE_NAME.name());
+
+        PlayerModel playerModel = new PlayerModel(playerName, x, y);
+        playerModel.setDamage(damage);
+        playerModel.setHp(playerHp);
+        playerModel.setTileName(tileName);
+
+        return playerModel;
     }
 }
