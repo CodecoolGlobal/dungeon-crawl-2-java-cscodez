@@ -175,7 +175,7 @@ public class BuildUI {
         ui.add(backButton, 0, 4);
         saveMenuButtons.add(backButton);
 
-        EventHandler<ActionEvent> saveAndExitButtonHandler = e -> {
+        EventHandler<ActionEvent> saveButtonHandler = e -> {
             try {
                 manager.setup();
             } catch (SQLException ex) {
@@ -193,7 +193,7 @@ public class BuildUI {
             }
         };
         backButton.setOnAction(backHandler);
-        saveButton.setOnAction(saveAndExitButtonHandler);
+        saveButton.setOnAction(saveButtonHandler);
         exitButton.setOnAction(exitButtonHandler);
     }
 
@@ -224,7 +224,6 @@ public class BuildUI {
             ui.add(saved, 0, 1);
             PlayerModel playerModel = manager.savePlayer(map.getPlayer());
             String gameMap = Serialization.serialize(map);
-            System.out.println(gameMap);
             manager.saveGameState(manager.makeGameState(playerModel, saveNameInput.getText(), gameMap));
 
         };
