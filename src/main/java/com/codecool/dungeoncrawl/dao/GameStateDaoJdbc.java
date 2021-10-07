@@ -6,7 +6,9 @@ import com.codecool.dungeoncrawl.model.PlayerModel;
 import javax.sql.DataSource;
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GameStateDaoJdbc implements GameStateDao {
     private DataSource dataSource;
@@ -92,5 +94,29 @@ public class GameStateDaoJdbc implements GameStateDao {
     @Override
     public List<GameState> getAll() {
         return null;
+    }
+
+    public HashMap<Integer, String> getIdAndName(){
+        try(Connection conn = dataSource.getConnection()){
+            String sql = "SELECT id, name_of_save FROM game_state GROUP BY game_state.id";
+            PreparedStatement statement = conn.prepareStatement(sql);
+            ResultSet resultSet = statement.executeQuery();
+
+            if(!resultSet.next()){
+                return null;
+            }
+
+            HashMap<Integer, String> gameSaves = new HashMap<>();
+
+            while (resultSet.next()){
+                int gameStateId = resultSet.getInt(GameStateColumns.ID.getName());
+                String nameOfSave = resultSet.getString(GameStateColumns.NAME_OF_SAVE.getName());
+                gameSaves.put(gameStateId, nameOfSave);
+            }
+
+            return gameSaves;
+        } catch (SQLException e){
+            throw new RuntimeException(e);
+        }
     }
 }
