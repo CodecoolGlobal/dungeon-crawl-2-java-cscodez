@@ -1,5 +1,6 @@
-package com.codecool.dungeoncrawl.dao;
+package com.codecool.dungeoncrawl.dao.game;
 
+import com.codecool.dungeoncrawl.dao.player.PlayerColumns;
 import com.codecool.dungeoncrawl.model.GameState;
 import com.codecool.dungeoncrawl.model.PlayerModel;
 
@@ -7,6 +8,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 import java.sql.Date;
 import java.util.*;
+import java.util.HashMap;
 
 public class GameStateDaoJdbc implements GameStateDao {
     private DataSource dataSource;
@@ -66,9 +68,10 @@ public class GameStateDaoJdbc implements GameStateDao {
             int playerId = resultSet.getInt(GameStateColumns.PLAYER_ID.getName());
             String nameOfSave = resultSet.getString(GameStateColumns.NAME_OF_SAVE.getName());
 
-            GameState gameState = new GameState(currentMap, new Date(savedAt.getTime()), buildPlayerModel(resultSet));
+            GameState gameState = new GameState(currentMap, new Date(savedAt.getTime()), new PlayerModel());
             gameState.setId(gameStateId);
             gameState.setNameOfSave(nameOfSave);
+            gameState.setPlayerId(playerId);
 
             return gameState;
         } catch (SQLException e){
@@ -95,7 +98,6 @@ public class GameStateDaoJdbc implements GameStateDao {
                 gameSaves.put(gameStateId, nameOfSave);
             }while (resultSet.next());
 
-            System.out.println(Arrays.toString(gameSaves.values().toArray()));
             return gameSaves;
         } catch (SQLException e){
             throw new RuntimeException(e);

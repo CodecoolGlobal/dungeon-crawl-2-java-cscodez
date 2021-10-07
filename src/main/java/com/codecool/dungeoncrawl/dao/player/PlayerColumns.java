@@ -1,4 +1,4 @@
-package com.codecool.dungeoncrawl.dao;
+package com.codecool.dungeoncrawl.dao.player;
 
 public enum PlayerColumns {
     ID("id"),

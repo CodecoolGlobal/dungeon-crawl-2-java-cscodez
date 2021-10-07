@@ -1,6 +1,10 @@
 package com.codecool.dungeoncrawl.dao;
 
 import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.dao.game.GameStateDao;
+import com.codecool.dungeoncrawl.dao.game.GameStateDaoJdbc;
+import com.codecool.dungeoncrawl.dao.player.PlayerDao;
+import com.codecool.dungeoncrawl.dao.player.PlayerDaoJdbc;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.model.GameState;
 import com.codecool.dungeoncrawl.model.PlayerModel;
@@ -66,5 +70,12 @@ public class GameDatabaseManager {
     public GameMap getSavedGameState(int savedGameId) {
         GameState gameState = gameDao.get(savedGameId);
         return (GameMap) Serialization.deserialize(gameState.getCurrentMap(), GameMap.class);
+    }
+
+    public GameState getGameState(int id){
+        GameState gameState = gameDao.get(id);
+        PlayerModel playerModel = playerDao.get(gameState.getPlayerId());
+        gameState.setPlayer(playerModel);
+        return gameState;
     }
 }

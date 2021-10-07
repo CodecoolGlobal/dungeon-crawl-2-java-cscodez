@@ -10,6 +10,8 @@ public class PlayerModel extends BaseModel {
     private int damage;
     private String tileName;
 
+    public PlayerModel(){}
+
     public PlayerModel(String playerName, int x, int y) {
         this.playerName = playerName;
         this.x = x;
