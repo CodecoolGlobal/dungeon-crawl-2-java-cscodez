@@ -9,6 +9,7 @@ import javax.sql.DataSource;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.util.HashMap;
 
 public class GameDatabaseManager {
     private PlayerDao playerDao;
@@ -53,5 +54,9 @@ public class GameDatabaseManager {
 
     public void saveGameState(GameState gameState) {
         gameDao.add(gameState);
+    }
+
+    public HashMap<Integer, String> getAllIdAndName() {
+        return gameDao.getIdAndName();
     }
 }

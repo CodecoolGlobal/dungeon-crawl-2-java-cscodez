@@ -203,15 +203,20 @@ public class BuildUI {
     public void loadInputPopUp(GridPane ui, Button loadButton, Button startButton, Button exitButton) {
         Label l = new Label("Choose a saved game: ");
 
-        ArrayList<String> savedGames = new ArrayList<>();
-        ChoiceBox choices = new ChoiceBox(FXCollections.observableArrayList(savedGames));
+        HashMap<Integer, String> allIdsAndNames = manager.getAllIdAndName();
+
+
+
+        ChoiceBox choices = new ChoiceBox(FXCollections.observableArrayList(allIdsAndNames.values()));
 
         choices.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
             public void changed(ObservableValue ov, Number value, Number new_value)
             {
+                int idOfSavedGame = new_value.intValue()+1;
+
 
                 // set the text for the label to the selected item
-                String selectedGameState = savedGames.get(new_value.intValue());
+                //String selectedGameState = savedGames.get(new_value.intValue());
             }
         });
 
