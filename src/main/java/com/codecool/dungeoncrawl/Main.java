@@ -25,7 +25,7 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 
 public class Main extends Application {
-    GameMap map = MapLoader.loadMap("/map.txt");
+    public static GameMap map = MapLoader.loadMap("/map.txt");
     GridPane ui = new GridPane();
     BuildUI uiBuilder = new BuildUI();
     int visibleSize = 20;
@@ -199,6 +199,5 @@ public class Main extends Application {
         }
         System.exit(0);
     }
-
 }
 
