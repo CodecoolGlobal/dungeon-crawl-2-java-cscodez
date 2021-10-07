@@ -1,19 +1,13 @@
 package com.codecool.dungeoncrawl;
 
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
-import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 import com.codecool.dungeoncrawl.logic.GameMap;
 import com.codecool.dungeoncrawl.logic.MapLoader;
-import com.codecool.dungeoncrawl.logic.actors.Player;
-import com.codecool.dungeoncrawl.logic.tiles.Tiles;
 import com.codecool.dungeoncrawl.util.BuildUI;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Label;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
@@ -27,13 +21,9 @@ import java.sql.SQLException;
 public class Main extends Application {
     public static GameMap map = MapLoader.loadMap("/map.txt");
     GridPane ui = new GridPane();
-    BuildUI uiBuilder = new BuildUI();
-    int visibleSize = 20;
-    Canvas canvas = new Canvas(
-            visibleSize * Tiles.TILE_WIDTH,
-            visibleSize * Tiles.TILE_WIDTH);
-    GraphicsContext context = canvas.getGraphicsContext2D();
-    Label healthLabel = new Label();
+    BuildUI uiBuilder = new BuildUI(ui);
+
+
     GameDatabaseManager dbManager;
     boolean isInventoryActive = false;
     boolean isSavingMenuActive = false;
@@ -49,18 +39,14 @@ public class Main extends Application {
         this.ui.setPrefWidth(250);
         this.ui.setPadding(new Insets(10));
 
-        this.ui.add(new Label("Health: "), 0, 0);
-        this.ui.add(healthLabel, 1, 0);
-        healthLabel.setTextFill(Color.RED);
-
         BorderPane borderPane = new BorderPane();
 
-        borderPane.setCenter(canvas);
+        borderPane.setCenter(uiBuilder.getCanvas());
         borderPane.setRight(ui);
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
-        refresh();
+        uiBuilder.refresh();
         scene.setOnKeyPressed(this::onKeyPressed);
 
         primaryStage.setTitle("Dungeon Crawl");
@@ -99,7 +85,7 @@ public class Main extends Application {
                     break;
                 case I:
                     if (!isInventoryActive) {
-                        uiBuilder.inventoryDisplayer(ui, map, healthLabel);
+                        uiBuilder.inventoryDisplayer(ui, map, uiBuilder.getHealthLabel());
                         isInventoryActive = true;
                     } else {
                         uiBuilder.removeInventory();
@@ -125,61 +111,7 @@ public class Main extends Application {
 
         }
         map.resetEnemiesAttack();
-        refresh();
-    }
-
-
-    private void refresh() {
-        context.setFill(Color.BLACK);
-        context.fillRect(0, 0, canvas.getWidth(), canvas.getHeight());
-        int[] startCoordinate = map.getPlayerCoordinate(visibleSize);
-
-        int j = 0;
-        int k = 0;
-
-        for (int x = startCoordinate[0]; x < visibleSize + startCoordinate[0]; x++) {
-            for (int y = startCoordinate[1]; y < startCoordinate[1] + visibleSize; y++) {
-                Cell cell = map.getCell(x, y);
-                if (cell.getActor() != null) {
-                    if (cell.getItem() != null && cell.getActor() instanceof Player) {
-                        uiBuilder.pickUpButtonHandler(this.ui, cell, map);
-                    }
-                    Tiles.drawTile(context, cell.getActor(), k, j);
-
-                } else if (cell.getItem() != null) {
-                    Tiles.drawTile(context, cell.getItem(), k, j);
-                } else {
-                    Tiles.drawTile(context, cell, k, j);
-                }
-                j++;
-            }
-            j = 0;
-            k++;
-        }
-        healthLabel.setText("" + map.getPlayer().getHealth());
-        if (checkIfDoorIsOpen()) {
-            Player player = map.getPlayer();
-            renderNewMap(player);
-        }
-    }
-
-
-    private boolean checkIfDoorIsOpen() {
-        for (Cell[] cellRow : map.getCells()) {
-            for (Cell cell : cellRow) {
-                if (cell.getType().equals(CellType.OPENED_DOOR)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    private void renderNewMap(Player player) {
-        map = MapLoader.loadMap("/map2.txt");
-        Cell playerCell = map.getPlayer().getCell();
-        player.setCell(playerCell);
-        map.setPlayer(player);
+        uiBuilder.refresh();
     }
 
     private void setupDbManager() {
