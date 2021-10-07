@@ -1,4 +1,4 @@
-package com.codecool.dungeoncrawl.dao;
+package com.codecool.dungeoncrawl.dao.game;
 
 public enum GameStateColumns {
     ID("id"),

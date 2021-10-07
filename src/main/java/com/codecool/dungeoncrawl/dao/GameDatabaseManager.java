@@ -1,5 +1,9 @@
 package com.codecool.dungeoncrawl.dao;
 
+import com.codecool.dungeoncrawl.dao.game.GameStateDao;
+import com.codecool.dungeoncrawl.dao.game.GameStateDaoJdbc;
+import com.codecool.dungeoncrawl.dao.player.PlayerDao;
+import com.codecool.dungeoncrawl.dao.player.PlayerDaoJdbc;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.model.GameState;
 import com.codecool.dungeoncrawl.model.PlayerModel;

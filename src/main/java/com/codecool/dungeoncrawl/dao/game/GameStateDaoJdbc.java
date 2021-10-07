@@ -1,14 +1,12 @@
-package com.codecool.dungeoncrawl.dao;
+package com.codecool.dungeoncrawl.dao.game;
 
+import com.codecool.dungeoncrawl.dao.player.PlayerColumns;
 import com.codecool.dungeoncrawl.model.GameState;
 import com.codecool.dungeoncrawl.model.PlayerModel;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class GameStateDaoJdbc implements GameStateDao {
     private DataSource dataSource;
