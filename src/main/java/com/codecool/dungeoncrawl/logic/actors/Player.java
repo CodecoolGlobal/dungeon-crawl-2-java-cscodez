@@ -21,11 +21,12 @@ public class Player extends Actor {
     }
 
 
-    public void setItemToInventory (Item item, String increaseOrDecrease) {
+    public void setItemToInventory (String itemName, String increaseOrDecrease) {
         int difference = 0;
         if (increaseOrDecrease.equals("increase")) difference = 1;
         else if (increaseOrDecrease.equals("decrease")) difference = -1;
-        inventory.merge(item.getName(), difference, Integer::sum);
+        inventory.merge(itemName, difference, Integer::sum);
+        if (inventory.get(itemName) == 0) inventory.remove(itemName);
     }
 
     public String getName() {return "";}

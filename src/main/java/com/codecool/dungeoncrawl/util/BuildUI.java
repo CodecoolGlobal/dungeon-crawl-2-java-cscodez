@@ -74,13 +74,8 @@ public class BuildUI {
         }
         for (String item : hashMap.keySet()) {
             if (!item.equals("Lightsaber")) {
-                StringBuilder displayString = new StringBuilder();
                 Button useButton = new Button("use");
-                this.inventoryLabel = new Label();
-                displayString.append(item);
-                displayString.append(" : ");
-                displayString.append(hashMap.get(item));
-                displayString.append("\n");
+                StringBuilder displayString = getInventoryLine(hashMap, item);
                 inventoryLabel.setText(displayString.toString());
                 this.ui.add(inventoryLabel, itemCol, row);
                 this.ui.add(useButton, buttonCol, row);
@@ -90,17 +85,27 @@ public class BuildUI {
                     EventHandler<ActionEvent> useButtonEvent = e -> {
                         if (hashMap.get(item) > 0) {
                             player.setHealth(player.getHealth() + BlueMilk.getHealing());
-
+                            Main.map.getPlayer().setItemToInventory(item, "decrease");
+                            ui.getChildren().remove(inventoryLabel);
+                            ui.getChildren().remove(useButton);
+                            inventoryDisplayer(ui, Main.map, healthLabel);
                         }
                         healthLabel.setText("" + map.getPlayer().getHealth());
-                        ui.getChildren().remove(inventoryLabel);
-                        ui.getChildren().remove(useButton);
-
                     };
                     useButton.setOnAction(useButtonEvent);
                 }
             }
         }
+    }
+
+    private StringBuilder getInventoryLine(HashMap<String, Integer> hashMap, String item) {
+        StringBuilder displayString = new StringBuilder();
+        this.inventoryLabel = new Label();
+        displayString.append(item);
+        displayString.append(" : ");
+        displayString.append(hashMap.get(item));
+        displayString.append("\n");
+        return displayString;
     }
 
     public void removeInventory() {
@@ -114,7 +119,7 @@ public class BuildUI {
         Button yesButton = new Button("Pick up\n" + cell.getItem().getName());
         Button noButton = new Button("Don't pickup\n" + cell.getItem().getName());
         EventHandler<ActionEvent> yesEvent = e -> {
-            map.getPlayer().setItemToInventory(cell.getItem(), "increase");
+            map.getPlayer().setItemToInventory(cell.getItem().getName(), "increase");
 
             if (cell.getItem() instanceof Weapon) {
                 map.getPlayer().setWeapon((Weapon) cell.getItem());
