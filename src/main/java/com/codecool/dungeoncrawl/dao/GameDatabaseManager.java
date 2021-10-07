@@ -58,4 +58,11 @@ public class GameDatabaseManager {
     public void saveGameState(GameState gameState) {
         gameDao.add(gameState);
     }
+
+    public GameState getGameState(int id){
+        GameState gameState = gameDao.get(id);
+        PlayerModel playerModel = playerDao.get(gameState.getPlayerId());
+        gameState.setPlayer(playerModel);
+        return gameState;
+    }
 }
