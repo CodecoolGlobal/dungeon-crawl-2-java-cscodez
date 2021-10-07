@@ -165,7 +165,7 @@ public class BuildUI {
             ui.getChildren().remove(saveButton);
             ui.add(saved, 0, 1);
             PlayerModel playerModel = manager.savePlayer(map.getPlayer());
-            String gameMap = MakeGson.convertObjectToJson(map);
+            String gameMap = Serialization.serialize(map);
             System.out.println(gameMap);
             manager.saveGameState(manager.makeGameState(playerModel, saveNameInput.getText(), gameMap));
 
