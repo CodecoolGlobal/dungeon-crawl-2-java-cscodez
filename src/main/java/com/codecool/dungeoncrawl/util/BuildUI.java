@@ -1,14 +1,14 @@
 package com.codecool.dungeoncrawl.util;
 
+import com.codecool.dungeoncrawl.Main;
 import com.codecool.dungeoncrawl.dao.GameDatabaseManager;
 import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.GameMap;
+import com.codecool.dungeoncrawl.logic.MapLoader;
 import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.items.BlueMilk;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
 import com.codecool.dungeoncrawl.model.PlayerModel;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,6 +21,7 @@ import javafx.scene.layout.GridPane;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 public class BuildUI {
 
@@ -192,7 +193,7 @@ public class BuildUI {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            loadInputPopUp(ui, loadButton, startButton, exitButton);
+            loadInputPopUp(ui, loadButton, startButton, exitButton, map);
         };
         loadButton.setOnAction(loadButtonHandler);
 
@@ -200,34 +201,48 @@ public class BuildUI {
 
     }
 
-    public void loadInputPopUp(GridPane ui, Button loadButton, Button startButton, Button exitButton) {
+    public void loadInputPopUp(GridPane ui, Button loadButton, Button startButton, Button exitButton, GameMap map) {
         Label l = new Label("Choose a saved game: ");
+        Button loadChosenGame = new Button("Load");
 
         HashMap<Integer, String> allIdsAndNames = manager.getAllIdAndName();
 
+        ChoiceBox<String> choices = new ChoiceBox<>(FXCollections.observableArrayList(allIdsAndNames.values()));
 
-
-        ChoiceBox choices = new ChoiceBox(FXCollections.observableArrayList(allIdsAndNames.values()));
-
-        choices.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
-            public void changed(ObservableValue ov, Number value, Number new_value)
-            {
-                int idOfSavedGame = new_value.intValue()+1;
-
-
-                // set the text for the label to the selected item
-                //String selectedGameState = savedGames.get(new_value.intValue());
-            }
-        });
+        //getChoice(choices);
 
         ui.getChildren().remove(startButton);
         ui.add(choices, 0, 1);
+        ui.add(loadChosenGame, 1, 1);
 
+        EventHandler<ActionEvent> loadSavedGameHandler = e -> {
+            String choseSavedGameName = choices.getSelectionModel().getSelectedItem();
+            System.out.println(choseSavedGameName);
+            for (var item : allIdsAndNames.entrySet()) {
+                if(item.getValue().equals(choseSavedGameName)) {
+                    Main.map = manager.getSavedGameState(item.getKey());
+                    buildConnectionsAfterLoad(Main.map);
+                }
+            }
 
+            ui.getChildren().remove(choices);
+            ui.getChildren().remove(loadChosenGame);
+            ui.getChildren().remove(loadButton);
+            ui.getChildren().remove(exitButton);
 
-
+        };
+        loadChosenGame.setOnAction(loadSavedGameHandler);
 
     }
 
-
+    private void buildConnectionsAfterLoad(GameMap gameMap) {
+        for (Cell[] cell : gameMap.getCells()) {
+            for (Cell cell1 : cell) {
+                cell1.setGameMap(gameMap);
+                if (cell1.getActor() != null) cell1.getActor().setCell(cell1);
+                if (cell1.getActor() != null && cell1.getActor() instanceof Player) gameMap.setPlayer((Player) cell1.getActor());
+                if (cell1.getItem() != null) cell1.getItem().setCell(cell1);
+            }
+        }
+    }
 }
