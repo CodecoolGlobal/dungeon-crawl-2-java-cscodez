@@ -4,7 +4,7 @@ import com.codecool.dungeoncrawl.logic.Cell;
 import com.codecool.dungeoncrawl.logic.CellType;
 
 public class Door {
-    private final transient Cell cell;
+    private transient Cell cell;
     private final int numberOfKeysRequiredToOpen;
     private int x;
     private int y;
@@ -15,6 +15,10 @@ public class Door {
         this.numberOfKeysRequiredToOpen = numberOfKeysRequiredToOpen;
         this.x = cell.getX();
         this.y = cell.getY();
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 
     public int getNumberOfKeysRequiredToOpen() {
