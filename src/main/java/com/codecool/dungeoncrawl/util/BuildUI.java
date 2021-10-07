@@ -164,7 +164,7 @@ public class BuildUI {
             textInputPopUp(ui, map, saveButton, saved);
         };
 
-        EventHandler<ActionEvent> exitButtonHandler = e -> System.exit(0);
+        EventHandler<ActionEvent> exitButtonHandler = e -> exit();
 
         EventHandler<ActionEvent> backHandler = e -> {
             for (Button button : saveMenuButtons) {
@@ -175,6 +175,10 @@ public class BuildUI {
         backButton.setOnAction(backHandler);
         saveButton.setOnAction(saveAndExitButtonHandler);
         exitButton.setOnAction(exitButtonHandler);
+    }
+
+    private void exit() {
+        System.exit(0);
     }
 
     public void removeSavingMenu(GridPane ui) {
@@ -228,7 +232,18 @@ public class BuildUI {
             }
             loadInputPopUp(ui, loadButton, startButton, exitButton, map);
         };
+
+        EventHandler<ActionEvent> startNewGameHandler = e -> {
+            ui.getChildren().remove(startButton);
+            ui.getChildren().remove(loadButton);
+            ui.getChildren().remove(exitButton);
+        };
+
+        EventHandler<ActionEvent> exitButtonHandler = e -> exit();
+
         loadButton.setOnAction(loadButtonHandler);
+        startButton.setOnAction(startNewGameHandler);
+        exitButton.setOnAction(exitButtonHandler);
 
 
 
