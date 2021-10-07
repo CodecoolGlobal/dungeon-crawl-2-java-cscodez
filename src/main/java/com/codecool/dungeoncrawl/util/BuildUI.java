@@ -7,9 +7,13 @@ import com.codecool.dungeoncrawl.logic.actors.Player;
 import com.codecool.dungeoncrawl.logic.items.BlueMilk;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
 import com.codecool.dungeoncrawl.model.PlayerModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
@@ -171,7 +175,7 @@ public class BuildUI {
     }
 
     public void loadMenu(GridPane ui, GameMap map) {
-        Button startButton = new Button("Start");
+        Button startButton = new Button("Start new game");
         Button loadButton = new Button("Load");
         Button exitButton = new Button("Exit");
 
@@ -197,25 +201,25 @@ public class BuildUI {
     }
 
     public void loadInputPopUp(GridPane ui, Button loadButton, Button startButton, Button exitButton) {
-        TextField loadNameInput = new TextField();
-        Button loadGameButton  = new Button("Load game");
+        Label l = new Label("Choose a saved game: ");
+
+        ArrayList<String> savedGames = new ArrayList<>();
+        ChoiceBox choices = new ChoiceBox(FXCollections.observableArrayList(savedGames));
+
+        choices.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            public void changed(ObservableValue ov, Number value, Number new_value)
+            {
+
+                // set the text for the label to the selected item
+                String selectedGameState = savedGames.get(new_value.intValue());
+            }
+        });
 
         ui.getChildren().remove(startButton);
-        ui.add(loadNameInput, 0, 1);
-        ui.add(loadGameButton, 1, 1);
-        //ui.add(loadButton,0, 1 );
+        ui.add(choices, 0, 1);
 
-        EventHandler<ActionEvent> loadGameButtonHandler = e -> {
 
-            //loadGameInput has the name of loadable game!
 
-            ui.getChildren().remove(loadNameInput);
-            ui.getChildren().remove(loadGameButton);
-            ui.getChildren().remove(loadButton);
-            ui.getChildren().remove(exitButton);
-        };
-
-        loadGameButton.setOnAction(loadGameButtonHandler);
 
 
     }
