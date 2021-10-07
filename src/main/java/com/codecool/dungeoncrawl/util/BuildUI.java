@@ -146,7 +146,7 @@ public class BuildUI {
 
         Button backButton = new Button("Back");
         Button saveButton = new Button("Save");
-        Button exitButton = new Button("Exit");
+        Button exitButton = new Button("Exit  ");
 
         ui.add(saveButton, 0, 1);
         saveMenuButtons.add(saveButton);
@@ -213,9 +213,9 @@ public class BuildUI {
     }
 
     public void loadMenu(GridPane ui, GameMap map) {
-        Button startButton = new Button("Start new game");
-        Button loadButton = new Button("Load");
-        Button exitButton = new Button("Exit");
+        Button startButton = new Button("New game");
+        Button loadButton = new Button("Load  ");
+        Button exitButton = new Button("Exit   ");
 
         ui.add(loadButton, 0, 1);
         //saveMenuButtons.add(loadButton);
