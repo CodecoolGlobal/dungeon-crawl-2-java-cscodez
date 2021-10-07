@@ -88,7 +88,10 @@ public class BuildUI {
                 row++;
                 if (item.equals(BlueMilk.getClassName())) {
                     EventHandler<ActionEvent> useButtonEvent = e -> {
-                        player.setHealth(player.getHealth()+BlueMilk.getHealing());
+                        if (hashMap.get(item) > 0) {
+                            player.setHealth(player.getHealth() + BlueMilk.getHealing());
+
+                        }
                         healthLabel.setText("" + map.getPlayer().getHealth());
                         ui.getChildren().remove(inventoryLabel);
                         ui.getChildren().remove(useButton);
@@ -111,18 +114,16 @@ public class BuildUI {
         Button yesButton = new Button("Pick up\n" + cell.getItem().getName());
         Button noButton = new Button("Don't pickup\n" + cell.getItem().getName());
         EventHandler<ActionEvent> yesEvent = e -> {
-            map.getPlayer().setItemToInventory(cell.getItem());
+            map.getPlayer().setItemToInventory(cell.getItem(), "increase");
 
             if (cell.getItem() instanceof Weapon) {
                 map.getPlayer().setWeapon((Weapon) cell.getItem());
             }
-
             cell.setItem(null);
             ui.getChildren().remove(yesButton);
             ui.getChildren().remove(noButton);
         };
         EventHandler<ActionEvent> noEvent = e -> {
-            System.out.println("helloNo");
             ui.getChildren().remove(yesButton);
             ui.getChildren().remove(noButton);
         };
