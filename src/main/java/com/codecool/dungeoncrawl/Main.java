@@ -65,6 +65,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+        uiBuilder.loadMenu(ui, map);
     }
 
     private void onKeyReleased(KeyEvent keyEvent) {
