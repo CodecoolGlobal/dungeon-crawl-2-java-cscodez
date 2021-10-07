@@ -1,4 +1,4 @@
-package com.codecool.dungeoncrawl.dao;
+package com.codecool.dungeoncrawl.dao.game;
 
 import com.codecool.dungeoncrawl.model.GameState;
 

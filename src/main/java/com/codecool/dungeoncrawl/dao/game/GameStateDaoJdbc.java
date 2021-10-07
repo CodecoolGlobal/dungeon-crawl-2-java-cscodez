@@ -1,14 +1,12 @@
-package com.codecool.dungeoncrawl.dao;
+package com.codecool.dungeoncrawl.dao.game;
 
+import com.codecool.dungeoncrawl.dao.player.PlayerColumns;
 import com.codecool.dungeoncrawl.model.GameState;
 import com.codecool.dungeoncrawl.model.PlayerModel;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class GameStateDaoJdbc implements GameStateDao {
     private DataSource dataSource;
@@ -68,9 +66,10 @@ public class GameStateDaoJdbc implements GameStateDao {
             int playerId = resultSet.getInt(GameStateColumns.PLAYER_ID.getName());
             String nameOfSave = resultSet.getString(GameStateColumns.NAME_OF_SAVE.getName());
 
-            GameState gameState = new GameState(currentMap, new Date(savedAt.getTime()), buildPlayerModel(resultSet));
+            GameState gameState = new GameState(currentMap, new Date(savedAt.getTime()), new PlayerModel());
             gameState.setId(gameStateId);
             gameState.setNameOfSave(nameOfSave);
+            gameState.setPlayerId(playerId);
 
             return gameState;
         } catch (SQLException e){
@@ -101,21 +100,5 @@ public class GameStateDaoJdbc implements GameStateDao {
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
-    }
-
-    private PlayerModel buildPlayerModel(ResultSet resultSet) throws SQLException {
-        String playerName = resultSet.getString(PlayerColumns.PLAYER_NAME.getName());
-        int playerHp = resultSet.getInt(PlayerColumns.HP.name());
-        int x = resultSet.getInt(PlayerColumns.X.name());
-        int y = resultSet.getInt(PlayerColumns.Y.name());
-        int damage = resultSet.getInt(PlayerColumns.DAMAGE.name());
-        String tileName = resultSet.getString(PlayerColumns.TILE_NAME.name());
-
-        PlayerModel playerModel = new PlayerModel(playerName, x, y);
-        playerModel.setDamage(damage);
-        playerModel.setHp(playerHp);
-        playerModel.setTileName(tileName);
-
-        return playerModel;
     }
 }
