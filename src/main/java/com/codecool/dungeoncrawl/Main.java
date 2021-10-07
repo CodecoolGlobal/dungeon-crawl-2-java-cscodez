@@ -88,7 +88,7 @@ public class Main extends Application {
                         uiBuilder.inventoryDisplayer(ui, map, uiBuilder.getHealthLabel());
                         isInventoryActive = true;
                     } else {
-                        uiBuilder.removeInventory();
+                        uiBuilder.clearSidePanel(ui);
                         isInventoryActive = false;
                     }
                     break;

@@ -11,9 +11,11 @@ import com.codecool.dungeoncrawl.logic.items.BlueMilk;
 import com.codecool.dungeoncrawl.logic.items.Weapon;
 import com.codecool.dungeoncrawl.logic.tiles.Tiles;
 import com.codecool.dungeoncrawl.model.PlayerModel;
+
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Node;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
@@ -24,8 +26,12 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
 import java.sql.SQLException;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
 public class BuildUI {
 
     private final GameDatabaseManager manager = new GameDatabaseManager();
@@ -53,7 +59,6 @@ public class BuildUI {
         return canvas;
     }
 
-
     public Label getHealthLabel() {
         return healthLabel;
     }
@@ -65,36 +70,55 @@ public class BuildUI {
         this.ui = ui;
         Player player = map.getPlayer();
         HashMap<String, Integer> hashMap= player.getInventory();
+        hashMap.remove("Lightsaber");
         this.whatsOnUi= new HashMap<>();
-        if (hashMap.keySet().size() == 0) {
-            this.inventoryLabel = new Label();
-            inventoryLabel.setText("Inventory\nis empty!");
-            this.ui.add(inventoryLabel, 0, 1);
-            this.whatsOnUi.put(inventoryLabel, null);
+        if (hashMap.keySet().size() == 0) showEmptyInventory();
+        else for (String item : hashMap.keySet()) {
+                row = buildRow(ui, healthLabel, itemCol, buttonCol, row, player, hashMap, item);
         }
-        for (String item : hashMap.keySet()) {
-            if (!item.equals("Lightsaber")) {
-                Button useButton = new Button("use");
-                StringBuilder displayString = getInventoryLine(hashMap, item);
-                inventoryLabel.setText(displayString.toString());
-                this.ui.add(inventoryLabel, itemCol, row);
-                this.ui.add(useButton, buttonCol, row);
-                whatsOnUi.put(inventoryLabel, useButton);
-                row++;
-                if (item.equals(BlueMilk.getClassName())) {
-                    EventHandler<ActionEvent> useButtonEvent = e -> {
-                        if (hashMap.get(item) > 0) {
-                            player.setHealth(player.getHealth() + BlueMilk.getHealing());
-                            Main.map.getPlayer().setItemToInventory(item, "decrease");
-                            ui.getChildren().remove(inventoryLabel);
-                            ui.getChildren().remove(useButton);
-                            inventoryDisplayer(ui, Main.map, healthLabel);
-                        }
-                        healthLabel.setText("" + map.getPlayer().getHealth());
-                    };
-                    useButton.setOnAction(useButtonEvent);
-                }
-            }
+    }
+
+    private int buildRow(GridPane ui, Label healthLabel, int itemCol, int buttonCol, int row, Player player, HashMap<String, Integer> hashMap, String item) {
+        Button useButton = new Button("use");
+        StringBuilder displayString = getInventoryLine(hashMap, item);
+        inventoryLabel.setText(displayString.toString());
+        this.ui.add(inventoryLabel, itemCol, row);
+        this.ui.add(useButton, buttonCol, row);
+        whatsOnUi.put(inventoryLabel, useButton);
+        row++;
+        if (item.equals(BlueMilk.getClassName())) {
+            EventHandler<ActionEvent> useButtonEvent = e -> {
+                useBlueMilk(ui, healthLabel, player, hashMap, item, useButton);
+            };
+            useButton.setOnAction(useButtonEvent);
+        }
+        return row;
+    }
+
+    private void showEmptyInventory() {
+        this.inventoryLabel = new Label();
+        inventoryLabel.setText("Inventory\nis empty!");
+        this.ui.add(inventoryLabel, 0, 1);
+        this.whatsOnUi.put(inventoryLabel, null);
+    }
+
+    private void useBlueMilk(GridPane ui, Label healthLabel, Player player, HashMap<String, Integer> hashMap, String item, Button useButton) {
+        if (hashMap.get(item) > 0) {
+            player.setHealth(player.getHealth() + BlueMilk.getHealing());
+            Main.map.getPlayer().setItemToInventory(item, "decrease");
+            clearSidePanel(ui);
+            inventoryDisplayer(ui, Main.map, healthLabel);
+        }
+        healthLabel.setText("" + Main.map.getPlayer().getHealth());
+    }
+
+    public void clearSidePanel(GridPane ui) {
+        List<Node> nodesToKeep= new LinkedList<>();
+        nodesToKeep.add(ui.getChildren().get(0));
+        nodesToKeep.add(ui.getChildren().get(1));
+        ui.getChildren().clear();
+        for (Node node : nodesToKeep) {
+            ui.getChildren().add(node);
         }
     }
 
@@ -106,13 +130,6 @@ public class BuildUI {
         displayString.append(hashMap.get(item));
         displayString.append("\n");
         return displayString;
-    }
-
-    public void removeInventory() {
-        for (Label label:this.whatsOnUi.keySet()) {
-            this.ui.getChildren().remove(label);
-            this.ui.getChildren().remove(whatsOnUi.get(label));
-        }
     }
 
     public void pickUpButtonHandler(GridPane ui, Cell cell, GameMap map) {
