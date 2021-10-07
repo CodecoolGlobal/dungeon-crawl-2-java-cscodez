@@ -218,11 +218,8 @@ public class BuildUI {
         Button exitButton = new Button("Exit   ");
 
         ui.add(loadButton, 0, 1);
-        //saveMenuButtons.add(loadButton);
         ui.add(exitButton, 0, 2);
-        //saveMenuButtons.add(exitButton);
         ui.add(startButton, 0, 4);
-        //saveMenuButtons.add(startButton);
 
         EventHandler<ActionEvent> loadButtonHandler = e -> {
             try {
@@ -257,8 +254,6 @@ public class BuildUI {
 
         ChoiceBox<String> choices = new ChoiceBox<>(FXCollections.observableArrayList(allIdsAndNames.values()));
 
-        //getChoice(choices);
-
         ui.getChildren().remove(startButton);
         ui.add(choices, 0, 1);
         ui.add(loadChosenGame, 1, 1);
@@ -273,12 +268,10 @@ public class BuildUI {
                     refresh();
                 }
             }
-
             ui.getChildren().remove(choices);
             ui.getChildren().remove(loadChosenGame);
             ui.getChildren().remove(loadButton);
             ui.getChildren().remove(exitButton);
-
         };
         loadChosenGame.setOnAction(loadSavedGameHandler);
 
