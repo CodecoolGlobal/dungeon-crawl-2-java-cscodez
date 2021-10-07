@@ -107,13 +107,13 @@ public class BuildUI {
         saved.setText("Saved");
 
         Button backButton = new Button("Back");
-        Button saveAndExitButton = new Button("Save");
-        Button exitWithoutSaveButton = new Button("Exit");
+        Button saveButton = new Button("Save");
+        Button exitButton = new Button("Exit");
 
-        ui.add(saveAndExitButton, 0, 1);
-        saveMenuButtons.add(saveAndExitButton);
-        ui.add(exitWithoutSaveButton, 0, 2);
-        saveMenuButtons.add(exitWithoutSaveButton);
+        ui.add(saveButton, 0, 1);
+        saveMenuButtons.add(saveButton);
+        ui.add(exitButton, 0, 2);
+        saveMenuButtons.add(exitButton);
         ui.add(backButton, 0, 4);
         saveMenuButtons.add(backButton);
 
@@ -123,7 +123,7 @@ public class BuildUI {
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
-            textInputPopUp(ui, map, saveAndExitButton, saved);
+            textInputPopUp(ui, map, saveButton, saved);
         };
 
         EventHandler<ActionEvent> exitButtonHandler = e -> System.exit(0);
@@ -135,8 +135,8 @@ public class BuildUI {
             }
         };
         backButton.setOnAction(backHandler);
-        saveAndExitButton.setOnAction(saveAndExitButtonHandler);
-        exitWithoutSaveButton.setOnAction(exitButtonHandler);
+        saveButton.setOnAction(saveAndExitButtonHandler);
+        exitButton.setOnAction(exitButtonHandler);
     }
 
     public void removeSavingMenu(GridPane ui) {
@@ -168,6 +168,56 @@ public class BuildUI {
         };
 
         saveButton.setOnAction(saveButtonHandler);
+    }
+
+    public void loadMenu(GridPane ui, GameMap map) {
+        Button startButton = new Button("Start");
+        Button loadButton = new Button("Load");
+        Button exitButton = new Button("Exit");
+
+        ui.add(loadButton, 0, 1);
+        //saveMenuButtons.add(loadButton);
+        ui.add(exitButton, 0, 2);
+        //saveMenuButtons.add(exitButton);
+        ui.add(startButton, 0, 4);
+        //saveMenuButtons.add(startButton);
+
+        EventHandler<ActionEvent> loadButtonHandler = e -> {
+            try {
+                manager.setup();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            loadInputPopUp(ui, loadButton, startButton, exitButton);
+        };
+        loadButton.setOnAction(loadButtonHandler);
+
+
+
+    }
+
+    public void loadInputPopUp(GridPane ui, Button loadButton, Button startButton, Button exitButton) {
+        TextField loadNameInput = new TextField();
+        Button loadGameButton  = new Button("Load game");
+
+        ui.getChildren().remove(startButton);
+        ui.add(loadNameInput, 0, 1);
+        ui.add(loadGameButton, 1, 1);
+        //ui.add(loadButton,0, 1 );
+
+        EventHandler<ActionEvent> loadGameButtonHandler = e -> {
+
+            //loadGameInput has the name of loadable game!
+
+            ui.getChildren().remove(loadNameInput);
+            ui.getChildren().remove(loadGameButton);
+            ui.getChildren().remove(loadButton);
+            ui.getChildren().remove(exitButton);
+        };
+
+        loadGameButton.setOnAction(loadGameButtonHandler);
+
+
     }
 
 

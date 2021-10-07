@@ -18,8 +18,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyCodeCombination;
 import javafx.scene.input.KeyCombination;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -46,12 +45,13 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-
+        ui.setBackground(new Background(new BackgroundFill(Color.LIGHTGRAY, CornerRadii.EMPTY, Insets.EMPTY)));
         this.ui.setPrefWidth(250);
         this.ui.setPadding(new Insets(10));
 
         this.ui.add(new Label("Health: "), 0, 0);
         this.ui.add(healthLabel, 1, 0);
+        healthLabel.setTextFill(Color.RED);
 
         BorderPane borderPane = new BorderPane();
 
@@ -65,6 +65,7 @@ public class Main extends Application {
 
         primaryStage.setTitle("Dungeon Crawl");
         primaryStage.show();
+        uiBuilder.loadMenu(ui, map);
     }
 
     private void onKeyReleased(KeyEvent keyEvent) {
