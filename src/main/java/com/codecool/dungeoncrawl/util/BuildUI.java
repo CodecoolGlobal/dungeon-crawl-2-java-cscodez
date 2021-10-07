@@ -50,7 +50,10 @@ public class BuildUI {
 
     public BuildUI(GridPane ui) {
         this.ui = ui;
-        ui.add(new Label("Health: "), 0, 0);
+        Label forHealth = new Label("Health:");
+
+        forHealth.setStyle("-fx-font-weight: bold");
+        ui.add(forHealth, 0, 0);
         ui.add(healthLabel, 1, 0);
         healthLabel.setTextFill(Color.RED);
     }
@@ -235,11 +238,8 @@ public class BuildUI {
         Button exitButton = new Button("Exit   ");
 
         ui.add(loadButton, 0, 1);
-        //saveMenuButtons.add(loadButton);
         ui.add(exitButton, 0, 2);
-        //saveMenuButtons.add(exitButton);
         ui.add(startButton, 0, 4);
-        //saveMenuButtons.add(startButton);
 
         EventHandler<ActionEvent> loadButtonHandler = e -> {
             try {
@@ -274,8 +274,6 @@ public class BuildUI {
 
         ChoiceBox<String> choices = new ChoiceBox<>(FXCollections.observableArrayList(allIdsAndNames.values()));
 
-        //getChoice(choices);
-
         ui.getChildren().remove(startButton);
         ui.add(choices, 0, 1);
         ui.add(loadChosenGame, 1, 1);
@@ -290,12 +288,10 @@ public class BuildUI {
                     refresh();
                 }
             }
-
             ui.getChildren().remove(choices);
             ui.getChildren().remove(loadChosenGame);
             ui.getChildren().remove(loadButton);
             ui.getChildren().remove(exitButton);
-
         };
         loadChosenGame.setOnAction(loadSavedGameHandler);
 
@@ -341,6 +337,14 @@ public class BuildUI {
             k++;
         }
         healthLabel.setText("" + Main.map.getPlayer().getHealth());
+        healthLabel.setStyle("-fx-font-size: 20px");
+        healthLabel.setStyle("-fx-font-weight: bold");
+
+        if (Integer.parseInt(healthLabel.getText()) < 20) {
+            healthLabel.setTextFill(Color.RED);
+        } else {
+            healthLabel.setTextFill(Color.web("#0000FF"));
+        }
         if (checkIfDoorIsOpen()) {
             Player player = Main.map.getPlayer();
             renderNewMap(player);
