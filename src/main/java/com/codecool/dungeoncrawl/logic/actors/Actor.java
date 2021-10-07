@@ -12,15 +12,10 @@ public abstract class Actor implements Drawable {
     protected int health = 10;
     protected int damage;
     private Weapon weapon;
-    private int x;
-    private int y;
-
 
     public Actor(Cell cell) {
         this.cell = cell;
         this.cell.setActor(this);
-        this.x=cell.getX();
-        this.y=cell.getY();
     }
 
     public void attack(Actor enemy) {
@@ -107,8 +102,6 @@ public abstract class Actor implements Drawable {
 
     public void setCell(Cell cell){
         this.cell = cell;
-        this.x = cell.getX();
-        this.y = cell.getY();
     }
 
     public Weapon getWeapon() {
@@ -117,13 +110,5 @@ public abstract class Actor implements Drawable {
 
     public void setWeapon(Weapon weapon) {
         this.weapon = weapon;
-    }
-
-    public int getXCoordinate() {
-        return x;
-    }
-
-    public int getYCoordinate() {
-        return y;
     }
 }
