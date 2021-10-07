@@ -5,10 +5,8 @@ import com.codecool.dungeoncrawl.model.PlayerModel;
 
 import javax.sql.DataSource;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.sql.Date;
+import java.util.*;
 
 public class GameStateDaoJdbc implements GameStateDao {
     private DataSource dataSource;
@@ -91,12 +89,13 @@ public class GameStateDaoJdbc implements GameStateDao {
 
             HashMap<Integer, String> gameSaves = new HashMap<>();
 
-            while (resultSet.next()){
+            do{
                 int gameStateId = resultSet.getInt(GameStateColumns.ID.getName());
                 String nameOfSave = resultSet.getString(GameStateColumns.NAME_OF_SAVE.getName());
                 gameSaves.put(gameStateId, nameOfSave);
-            }
+            }while (resultSet.next());
 
+            System.out.println(Arrays.toString(gameSaves.values().toArray()));
             return gameSaves;
         } catch (SQLException e){
             throw new RuntimeException(e);
