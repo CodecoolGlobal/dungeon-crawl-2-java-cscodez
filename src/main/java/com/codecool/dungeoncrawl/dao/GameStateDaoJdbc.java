@@ -68,20 +68,7 @@ public class GameStateDaoJdbc implements GameStateDao {
             int playerId = resultSet.getInt(GameStateColumns.PLAYER_ID.getName());
             String nameOfSave = resultSet.getString(GameStateColumns.NAME_OF_SAVE.getName());
 
-            String playerName = resultSet.getString(PlayerColumns.PLAYER_NAME.getName());
-            int playerHp = resultSet.getInt(PlayerColumns.HP.name());
-            int x = resultSet.getInt(PlayerColumns.X.name());
-            int y = resultSet.getInt(PlayerColumns.Y.name());
-            int damage = resultSet.getInt(PlayerColumns.DAMAGE.name());
-            String tileName = resultSet.getString(PlayerColumns.TILE_NAME.name());
-
-            PlayerModel playerModel = new PlayerModel(playerName, x, y);
-            playerModel.setDamage(damage);
-            playerModel.setHp(playerHp);
-            playerModel.setTileName(tileName);
-
-
-            GameState gameState = new GameState(currentMap, new Date(savedAt.getTime()), playerModel);
+            GameState gameState = new GameState(currentMap, new Date(savedAt.getTime()), buildPlayerModel(resultSet));
             gameState.setId(gameStateId);
             gameState.setNameOfSave(nameOfSave);
 
@@ -92,10 +79,6 @@ public class GameStateDaoJdbc implements GameStateDao {
     }
 
     @Override
-    public List<GameState> getAll() {
-        return null;
-    }
-
     public HashMap<Integer, String> getIdAndName(){
         try(Connection conn = dataSource.getConnection()){
             String sql = "SELECT id, name_of_save FROM game_state GROUP BY game_state.id";
@@ -118,5 +101,21 @@ public class GameStateDaoJdbc implements GameStateDao {
         } catch (SQLException e){
             throw new RuntimeException(e);
         }
+    }
+
+    private PlayerModel buildPlayerModel(ResultSet resultSet) throws SQLException {
+        String playerName = resultSet.getString(PlayerColumns.PLAYER_NAME.getName());
+        int playerHp = resultSet.getInt(PlayerColumns.HP.name());
+        int x = resultSet.getInt(PlayerColumns.X.name());
+        int y = resultSet.getInt(PlayerColumns.Y.name());
+        int damage = resultSet.getInt(PlayerColumns.DAMAGE.name());
+        String tileName = resultSet.getString(PlayerColumns.TILE_NAME.name());
+
+        PlayerModel playerModel = new PlayerModel(playerName, x, y);
+        playerModel.setDamage(damage);
+        playerModel.setHp(playerHp);
+        playerModel.setTileName(tileName);
+
+        return playerModel;
     }
 }
