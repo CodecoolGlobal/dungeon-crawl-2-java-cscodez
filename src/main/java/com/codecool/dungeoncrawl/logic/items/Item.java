@@ -10,6 +10,10 @@ public abstract class Item implements Drawable {
     private int x;
     private int y;
 
+    public Item() {
+        this.name = "";
+    }
+
     public Item(Cell cell, String tileName) {
         this.cell = cell;
         this.cell.setItem(this);
@@ -25,6 +29,10 @@ public abstract class Item implements Drawable {
 
     public String getName() {
         return name;
+    }
+
+    public void setCell(Cell cell) {
+        this.cell = cell;
     }
 }
 
